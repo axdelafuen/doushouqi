@@ -15,7 +15,7 @@ public struct Cell : CustomStringConvertible {
     
     public let piece:Piece?
     
-    init(cellType:CellType, owner: Owner = Owner.noOne, piece: Piece? = nil) {
+    public init(cellType:CellType, owner: Owner = Owner.noOne, piece: Piece? = nil) {
         self.cellType = cellType
         self.initialOwner = owner
         self.piece = piece

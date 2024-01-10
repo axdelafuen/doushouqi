@@ -13,7 +13,7 @@ public struct Piece : CustomStringConvertible{
     
     public let animal:Animal
     
-    init(owner: Owner, animal: Animal) {
+    public init(owner: Owner, animal: Animal) {
         self.owner = owner
         self.animal = animal
     }

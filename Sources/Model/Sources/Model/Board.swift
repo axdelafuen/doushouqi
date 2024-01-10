@@ -16,7 +16,7 @@ public struct Board {
     public private(set) var grid: [[Cell]] // suffisant car c'est une struct (pas de ref)
     
     // ameliorable
-    init?(grid: [[Cell]]) {
+    public init?(grid: [[Cell]]) {
         if(grid.isEmpty) {
             return nil
         }

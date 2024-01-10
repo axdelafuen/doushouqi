@@ -18,6 +18,9 @@ extension Board : CustomStringConvertible{
                 if let piece = grid[i][y].piece {
                     board += piece.animal.symbol() + piece.owner.symbol()
                 }
+                else {
+                    board += "    "
+                }
                 board += " "
             }
             board += "\n"

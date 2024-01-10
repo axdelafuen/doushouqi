@@ -5,7 +5,9 @@
 //  Created by etudiant on 09/01/2024.
 //
 
-enum Animal{
+import Foundation
+
+public enum Animal{
     case rat
     case cat
     case dog

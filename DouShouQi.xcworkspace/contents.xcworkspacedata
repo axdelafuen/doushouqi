@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:Sources/CommandLineExt">
+   </FileRef>
+   <FileRef
       location = "group:Sources/Model">
    </FileRef>
 </Workspace>

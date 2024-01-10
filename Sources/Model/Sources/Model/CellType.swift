@@ -5,7 +5,9 @@
 //  Created by etudiant on 09/01/2024.
 //
 
-enum CellType {
+import Foundation
+
+public enum CellType {
     case unknown
     case jungle
     case water

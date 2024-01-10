@@ -5,7 +5,9 @@
 //  Created by etudiant on 09/01/2024.
 //
 
-struct Cell : CustomStringConvertible {
+import Foundation
+
+public struct Cell : CustomStringConvertible {
     
     public let initialOwner:Owner
     
@@ -20,7 +22,7 @@ struct Cell : CustomStringConvertible {
     }
     
     // return string of the piece, its type and its owner
-    var description : String {
+    public var description : String {
         if let p = piece {
             return "\(p) on \(cellType), \(initialOwner)"
         }

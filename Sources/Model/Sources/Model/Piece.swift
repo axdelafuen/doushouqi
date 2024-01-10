@@ -5,7 +5,9 @@
 //  Created by etudiant on 09/01/2024.
 //
 
-struct Piece : CustomStringConvertible{
+import Foundation
+
+public struct Piece : CustomStringConvertible{
     
     public let owner:Owner
     
@@ -17,7 +19,7 @@ struct Piece : CustomStringConvertible{
     }
     
     // return string of the owner and his animal
-    var description : String {
+    public var description : String {
         return "[\(owner):\(animal)]"
     }
 }

@@ -13,8 +13,9 @@ public struct Board {
     
     public let nbColumns:Int
     
-    public private(set) var grid: [[Cell]]
+    public private(set) var grid: [[Cell]] // suffisant car c'est une struct (pas de ref)
     
+    // ameliorable
     init?(grid: [[Cell]]) {
         if(grid.isEmpty) {
             return nil
@@ -22,7 +23,7 @@ public struct Board {
         
         var rows:Int = 0
         
-        for i in 0...grid.count-1 {
+        for i in 1...grid.count-1 {
             if grid[i].count != grid[0].count {
                 return nil
             }

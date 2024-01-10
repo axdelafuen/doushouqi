@@ -9,5 +9,18 @@ import Foundation
 import Model
 
 public extension CellType {
-    
+    func symbol() -> String {
+            switch self {
+            case .den:
+                return "🪹"
+            case .jungle:
+                return "🌿"
+            case .trap:
+                return "🪤"
+            case .water:
+                return "💧"
+            case .unknown:
+                return " "
+            }
+        }
 }

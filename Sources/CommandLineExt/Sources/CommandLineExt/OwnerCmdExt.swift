@@ -8,8 +8,9 @@
 import Foundation
 import Model
 
+// extension of the Owner class, in order to use it only is CommandLineTest
 public extension Owner{
-    func symbol() -> String {
+    var symbol: String {
         switch self {
         case .noOne:
             return " "

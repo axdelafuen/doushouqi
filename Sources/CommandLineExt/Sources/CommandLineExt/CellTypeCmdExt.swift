@@ -8,8 +8,9 @@
 import Foundation
 import Model
 
+// extension of the CellType class, in order to use it only is CommandLineTest
 public extension CellType {
-    func symbol() -> String {
+    var symbol: String {
             switch self {
             case .den:
                 return "🪹"

@@ -8,8 +8,9 @@
 import Foundation
 import Model
 
+// extension of the Animal class, in order to use it only is CommandLineTest
 public extension Animal {
-    func symbol() -> String {
+    var symbol: String {
         switch self {
         case .rat:
             return "🐭"

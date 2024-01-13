@@ -1,0 +1,19 @@
+kind: pipeline
+type: docker
+name: CI
+ 
+trigger:
+  event:
+    - push
+
+steps:
+  - name: build
+    image: swift:latest
+    commands:
+      - cd ./Sources/Model/
+      - swift build
+      - cd ../CommandLineExt/
+      - swift build
+      - cd ../CommandLineTest/
+      - swift build
+

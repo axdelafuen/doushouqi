@@ -8,8 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		EC12744A2B4E8EC90089460F /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1274492B4E8EC90089460F /* main.swift */; };
-		EC1274522B4E8EF60089460F /* CommandLineExt in Frameworks */ = {isa = PBXBuildFile; productRef = EC1274512B4E8EF60089460F /* CommandLineExt */; };
-		EC1274542B4E8EF70089460F /* Model in Frameworks */ = {isa = PBXBuildFile; productRef = EC1274532B4E8EF70089460F /* Model */; };
+		EC20A87C2B5060F4008F2A0B /* CommandLineExt in Frameworks */ = {isa = PBXBuildFile; productRef = EC20A87B2B5060F4008F2A0B /* CommandLineExt */; };
+		EC311BA82B52C2DF0069CFD4 /* Model in Frameworks */ = {isa = PBXBuildFile; productRef = EC311BA72B52C2DF0069CFD4 /* Model */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -34,8 +34,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EC1274542B4E8EF70089460F /* Model in Frameworks */,
-				EC1274522B4E8EF60089460F /* CommandLineExt in Frameworks */,
+				EC311BA82B52C2DF0069CFD4 /* Model in Frameworks */,
+				EC20A87C2B5060F4008F2A0B /* CommandLineExt in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -91,8 +91,8 @@
 			);
 			name = CommandLineTest;
 			packageProductDependencies = (
-				EC1274512B4E8EF60089460F /* CommandLineExt */,
-				EC1274532B4E8EF70089460F /* Model */,
+				EC20A87B2B5060F4008F2A0B /* CommandLineExt */,
+				EC311BA72B52C2DF0069CFD4 /* Model */,
 			);
 			productName = CommandLineTest;
 			productReference = EC1274462B4E8EC90089460F /* CommandLineTest */;
@@ -303,11 +303,11 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		EC1274512B4E8EF60089460F /* CommandLineExt */ = {
+		EC20A87B2B5060F4008F2A0B /* CommandLineExt */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = CommandLineExt;
 		};
-		EC1274532B4E8EF70089460F /* Model */ = {
+		EC311BA72B52C2DF0069CFD4 /* Model */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Model;
 		};

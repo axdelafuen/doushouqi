@@ -5,8 +5,10 @@
 ![Swift](https://img.shields.io/badge/swift-F54A2A?style=for-the-badge&logo=swift&logoColor=white)
 
 <div align="center">
-    <h1>DouShouQi</h1
+    <h1>DouShouQi</h1>
     <span>Let your animal side speak</span>
+    <br><br>
+    <img src="./Documentations/doushouqi.png" height="200">
 </div>
 
 # Getting started

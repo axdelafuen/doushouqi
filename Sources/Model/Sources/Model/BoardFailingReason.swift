@@ -7,9 +7,24 @@
 
 import Foundation
 
-public enum BoardFailingReason {
+public enum BoardFailingReason : Equatable {
     case unknown
     case outOfBounds
     case cellNotEmpty
     case cellEmpty
+    
+    public static func == (lhs: BoardFailingReason, rhs: BoardFailingReason) -> Bool {
+        switch (lhs, rhs) {
+        case (.unknown, .unknown):
+            return true
+        case (.outOfBounds, .outOfBounds):
+            return true
+        case (.cellNotEmpty, .cellNotEmpty):
+            return true
+        case (.cellEmpty, .cellEmpty):
+            return true
+        default:
+            return false
+        }
+    }
 }

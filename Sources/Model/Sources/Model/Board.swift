@@ -23,7 +23,7 @@ public struct Board {
         
         var rows:Int = 0
         
-        for i in 1...grid.count-1 {
+        for i in 0...grid.count-1 {
             if grid[i].count != grid[0].count {
                 return nil
             }
@@ -31,7 +31,7 @@ public struct Board {
         }
         
         self.nbRows = rows
-        self.nbColumns = grid.count
+        self.nbColumns = grid[0].count
         self.grid = grid
     }
     

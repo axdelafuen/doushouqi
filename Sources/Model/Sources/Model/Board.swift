@@ -57,7 +57,7 @@ public struct Board {
             return BoardResult.failed(reason: BoardFailingReason.cellNotEmpty)
         }
         
-        grid[row][column].piece = piece
+        grid[row][column] = Cell(cellType: grid[row][column].cellType, owner: grid[row][column].initialOwner, piece: piece)
         return BoardResult.ok
     }
     
@@ -71,7 +71,7 @@ public struct Board {
             return BoardResult.failed(reason: BoardFailingReason.cellEmpty)
         }
         
-        grid[row][column].piece = nil
+        grid[row][column] = Cell(cellType: grid[row][column].cellType)
         return BoardResult.ok
     }
 }

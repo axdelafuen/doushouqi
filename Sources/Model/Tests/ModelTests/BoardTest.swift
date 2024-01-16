@@ -14,7 +14,7 @@ final class BoardTest: XCTestCase {
     
     private var grid:[[Cell]]!
     
-    override func setUpWithError() throws {
+    override func setUp() {
         // init grid
         grid =
         [

@@ -13,7 +13,7 @@ public struct Cell : CustomStringConvertible {
     
     public let cellType:CellType
     
-    public internal(set) var piece:Piece?
+    public let piece:Piece?
     
     public init(cellType:CellType, owner: Owner = Owner.noOne, piece: Piece? = nil) {
         self.cellType = cellType

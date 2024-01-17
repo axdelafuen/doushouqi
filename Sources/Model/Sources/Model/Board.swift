@@ -63,11 +63,11 @@ public struct Board {
     
     mutating public func removePiece(row:Int, column:Int) -> BoardResult {
         
-        if row > nbRows || column > nbColumns {
+        guard row <= nbRows || column <= nbColumns else {
             return BoardResult.failed(reason: BoardFailingReason.outOfBounds)
         }
         
-        if grid[row][column].piece == nil {
+        guard grid[row][column].piece != nil else {
             return BoardResult.failed(reason: BoardFailingReason.cellEmpty)
         }
         

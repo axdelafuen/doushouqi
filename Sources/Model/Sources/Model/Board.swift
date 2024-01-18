@@ -47,13 +47,14 @@ public struct Board {
         return (countPieces(of: Owner.player1), countPieces(of: Owner.player2))
     }
     
-    mutating public func insert(piece:Piece, withRow row:Int, andColumn column:Int) -> BoardResult {
+    // Insert une piece, à la ligne et colonne passer en parametre
+    mutating public func insert(piece:Piece, atRow row:Int, andColumn column:Int) -> BoardResult {
         
         if row > nbRows || column > nbColumns {
             return BoardResult.failed(reason: BoardFailingReason.outOfBounds)
         }
         
-        if grid[row][column].piece != nil {
+        guard grid[row][column].piece == nil else {
             return BoardResult.failed(reason: BoardFailingReason.cellNotEmpty)
         }
         
@@ -61,13 +62,14 @@ public struct Board {
         return BoardResult.ok
     }
     
-    mutating public func removePiece(withRown row:Int, andColumn column:Int) -> BoardResult {
+    // Supprime une piece, à la ligne et colonne passer en parametre
+    mutating public func removePiece(atRow row:Int, andColumn column:Int) -> BoardResult {
         
-        guard row <= nbRows || column <= nbColumns else {
+        guard row <= nbRows && column <= nbColumns else {
             return BoardResult.failed(reason: BoardFailingReason.outOfBounds)
         }
         
-        guard grid[row][column].piece != nil else {
+        if grid[row][column].piece == nil {
             return BoardResult.failed(reason: BoardFailingReason.cellEmpty)
         }
         

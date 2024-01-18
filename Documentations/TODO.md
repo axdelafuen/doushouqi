@@ -12,6 +12,8 @@
 
 - [ ] savoir expliquer les méthodes d'extensions des collections (Closure, cf. Code#)
 
-- [ ] faire des tests plus "complet", vérifier si ca retourne bien "ok" pas sufisant
+- [x] faire des tests plus "complet", vérifier si ca retourne bien "ok" pas sufisant
 
 - [x] changer le equatable (trop complexe pour rien)
+
+- [x] faire des tests paramétré

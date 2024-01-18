@@ -71,8 +71,11 @@ package "Model" {
 
 ```mermaid
 classDiagram
+
 	direction LR
+
     namespace Model{
+
         class Board {
             <<struct>>
             +nbRows : Int
@@ -119,9 +122,6 @@ classDiagram
         cellEmpty
         }
         
-        
-
-
         class Animal {
             <<enum>>
             rat
@@ -138,12 +138,11 @@ classDiagram
             <<struct>>
             +init(owner:Owner, animal:Animal)
         }
-        
-        
     }
 
     Cell --> "1" CellType : cellType
     Cell --> "1" Owner : initialOwner
+
     Board -->  Cell : grid [[]]
 
     Board ..> BoardResult
@@ -151,18 +150,23 @@ classDiagram
 
     Piece --> "1" Owner : owner
     Piece --> "1" Animal : animal
+
     Cell --> "?" Piece : piece
 
     namespace CommandLineExt{
+
         class CellTypeCmdExt{
             +symbol:String
         }
+
         class OwnerCmdExt{
             +symbol:String
         }
+
         class AnimalCmdExt{
             +symbol:String
         }
+
         class BoardCmdExt{
             +descritpion:String
         }

@@ -47,7 +47,7 @@ public struct Board {
         return (countPieces(of: Owner.player1), countPieces(of: Owner.player2))
     }
     
-    mutating public func insert(piece:Piece, row:Int, column:Int) -> BoardResult {
+    mutating public func insert(piece:Piece, withRow row:Int, andColumn column:Int) -> BoardResult {
         
         if row > nbRows || column > nbColumns {
             return BoardResult.failed(reason: BoardFailingReason.outOfBounds)
@@ -61,7 +61,7 @@ public struct Board {
         return BoardResult.ok
     }
     
-    mutating public func removePiece(row:Int, column:Int) -> BoardResult {
+    mutating public func removePiece(withRown row:Int, andColumn column:Int) -> BoardResult {
         
         guard row <= nbRows || column <= nbColumns else {
             return BoardResult.failed(reason: BoardFailingReason.outOfBounds)

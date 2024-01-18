@@ -2,7 +2,7 @@
 
 - [ ] commentaires
 
-- [ ] README.md -> faire des diagrammes
+- [x] README.md -> faire des diagrammes
 
 # TP2 
 

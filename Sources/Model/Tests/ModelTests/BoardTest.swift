@@ -106,11 +106,13 @@ final class BoardTest: XCTestCase {
         board = Board(grid: grid)
     }
     
+    // Init test
     func testBoardInit() throws {
         XCTAssertEqual(board.nbColumns, 7)
         XCTAssertEqual(board.nbRows, 10)
     }
 
+    // Methods tests
     func testCountPiecesOf() throws {
         XCTAssertEqual(board.countPieces(of: Owner.player1), 8)
     }
@@ -119,22 +121,57 @@ final class BoardTest: XCTestCase {
         assert(board.countPieces() == (8,8))
     }
     
-    func testInsertPass() throws {
-        XCTAssertEqual(board.insert(piece: Piece(owner:Owner.player1, animal: Animal.dog), row: 0, column: 1), BoardResult.ok)
+    func testInsertOk() throws {
+        func expect(row:Int, column:Int) {
+            XCTAssertNil(board.grid[row][column].piece)
+            XCTAssertEqual(board.insert(piece: Piece(owner:Owner.player1, animal: Animal.dog), atRow: row, andColumn: column), BoardResult.ok)
+            XCTAssertNotNil(board.grid[row][column])
+        }
+        expect(row: 0, column: 1)
+        expect(row: 3, column: 3)
+        expect(row: 7, column: 5)
     }
 
-    func testInsertFailed() throws {
-        XCTAssertEqual(board.insert(piece: Piece(owner:Owner.player1, animal: Animal.dog), row: 1, column: 1), BoardResult.failed(reason: BoardFailingReason.cellNotEmpty))
+    func testInsertCellNotEmpty() throws {
+        func expect(row:Int, column:Int){
+            XCTAssertNotNil(board.grid[row][column])
+            XCTAssertEqual(board.insert(piece: Piece(owner:Owner.player1, animal: Animal.dog), atRow: row, andColumn: column), BoardResult.failed(reason: BoardFailingReason.cellNotEmpty))
+        }
+        expect(row: 0, column: 0)
+        expect(row: 2, column: 2)
+        expect(row: 1, column: 5)
     }
     
-    func testRemovePiecePass() throws {
-        XCTAssertEqual(board.removePiece(row: 0, column: 0), BoardResult.ok)
+    func testInsertCellOutOfBounds() throws {
+        XCTAssertEqual(board.insert(piece: Piece(owner:Owner.player1, animal: Animal.dog), atRow: 20, andColumn: 1), BoardResult.failed(reason: BoardFailingReason.outOfBounds))
+    }
+    
+    func testRemovePieceOk() throws {
+        func expect(row:Int, column:Int) {
+            XCTAssertNotNil(board.grid[row][column].piece)
+            XCTAssertEqual(board.removePiece(atRow: row, andColumn: column), BoardResult.ok)
+            XCTAssertNil(board.grid[row][column].piece)
+        }
+        expect(row: 0, column: 0)
+        expect(row: 2, column: 2)
+        expect(row: 1, column: 5)
     }
 
-    func testRemovePieceFailed() throws {
-        XCTAssertEqual(board.removePiece(row: 0, column: 1), BoardResult.failed(reason: BoardFailingReason.cellEmpty))
+    func testRemovePieceCellEmpty() throws {
+        func expect(row:Int, column:Int) {
+            XCTAssertNil(board.grid[row][column].piece)
+            XCTAssertEqual(board.removePiece(atRow: row, andColumn: column), BoardResult.failed(reason: BoardFailingReason.cellEmpty))
+        }
+        expect(row: 0, column: 1)
+        expect(row: 3, column: 3)
+        expect(row: 7, column: 5)
     }
     
+    func testRemovePieceOutOfBounds() throws {
+        XCTAssertEqual(board.removePiece(atRow: 20, andColumn: 1), BoardResult.failed(reason: BoardFailingReason.outOfBounds))
+    }
+    
+    // Performances tests
     func testPerformanceCountPiecesOf() throws {
         self.measure {
             _ = board.countPieces(of: Owner.player1)
@@ -149,13 +186,13 @@ final class BoardTest: XCTestCase {
     
     func testPerformanceInsert() throws {
         self.measure {
-            _ = board.insert(piece: Piece(owner:Owner.player1, animal: Animal.dog), row: 0, column: 1)
+            _ = board.insert(piece: Piece(owner:Owner.player1, animal: Animal.dog), atRow: 0, andColumn: 1)
         }
     }
 
     func testPerformanceRemovePiece() throws {
         self.measure {
-            _ = board.removePiece(row: 0, column: 0)
+            _ = board.removePiece(atRow: 0, andColumn: 0)
         }
     }
 }

@@ -118,11 +118,11 @@ func debugTp2(){
         print("Nombre de piece pour player1 : ", board.countPieces(of: Owner.player1))
         print("Nombre de piece pour les 2 players : ", board.countPieces())
         
-        var insertResult = board.insert(piece: Piece(owner:Owner.player1, animal: Animal.dog), row: 0, column: 1)
+        var insertResult = board.insert(piece: Piece(owner:Owner.player1, animal: Animal.dog), atRow: 0, andColumn: 1)
         print("Insertion d'un 'dog' en 1,2 (should be 'ok') : ", insertResult)
         print(board)
         
-        insertResult = board.insert(piece: Piece(owner:Owner.player1, animal: Animal.dog), row: 1, column: 1)
+        insertResult = board.insert(piece: Piece(owner:Owner.player1, animal: Animal.dog), atRow: 1, andColumn: 1)
         print("Insertion d'un 'dog' en 2,2 (should be 'failed') : ", insertResult)
         print(board)
     }

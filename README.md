@@ -74,24 +74,23 @@ package "Model" {
 @startuml
 left to right direction
 package Model {
-    class Board {
+    struct Board {
         <<struct>>
         +nbRows : Int
         +nbColumns : Int
-        +init?(grid:[[Cell]])
+        +init?(grid:[ [ Cell ] ])
         +countPieces(owner:Owner) : Int
         +countPieces() : (Int, Int)
         +insert(piece:Piece, row:Int, column:Int) : BoardResult
         +removePiece(row:Int, column:Int) : BoardResult
     }
 
-    class Cell {
+    struct Cell {
         <<struct>>
         +init(type:CellType, owner:Owner, piece:Piece?)
     }
     
-    class CellType {
-        <<enum>>
+    enum CellType {
         unknown
         jungle
         water
@@ -99,29 +98,26 @@ package Model {
         den
     }
 
-    class Owner {
+    struct Owner {
         noOne
         player1
         player2
     }
     
-    class BoardResult {
-        <<enum>>
+    enum BoardResult {
         unknown
         ok
         failed(reason:BoardFailingReason)
     }
     
-    class BoardFailingReason {
-        <<enum>>
+    enum BoardFailingReason {
         unknown
         outOfBounds
         cellNotEmpty
         cellEmpty
     }
 
-    class Animal {
-        <<enum>>
+    enum Animal {
         rat
         cat
         dog
@@ -132,8 +128,7 @@ package Model {
         elephant
     }
     
-    class Piece {
-        <<struct>>
+    struct Piece {
         +init(owner:Owner, animal:Animal)
     }
 }
@@ -150,19 +145,19 @@ Piece --> "1" Animal : animal
 Cell --> "?" Piece : piece
 
 package CommandLineExt {
-    class CellTypeCmdExt {
+    struct CellTypeCmdExt {
         +symbol:String
     }
     
-    class OwnerCmdExt {
+    struct OwnerCmdExt {
         +symbol:String
     }
     
-    class AnimalCmdExt {
+    struct AnimalCmdExt {
         +symbol:String
     }
     
-    class BoardCmdExt {
+    struct BoardCmdExt {
         +description:String
     }
 }

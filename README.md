@@ -46,6 +46,7 @@ swift test
 
 ```plantuml
 @startuml
+left to right direction
 
 "CommandLineTest" --> "CommandLineExt"
 "CommandLineTest" --> "Model"

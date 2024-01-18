@@ -46,6 +46,10 @@ swift test
 
 ```plantuml
 @startuml
+
+"CommandLineTest" --> "CommandLineExt"
+"CommandLineTest" --> "Model"
+
 package "CommandLineTest" {
   node "Command Line Tool" 
 }
@@ -53,9 +57,6 @@ package "CommandLineTest" {
 package "CommandLineExt" {
   node "Model Classes Extensions"
 }
-
-"CommandLineTest" --> "CommandLineExt"
-"CommandLineTest" --> "Model"
 
 package "Model" {
   node "Model Classes"

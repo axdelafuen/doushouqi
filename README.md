@@ -69,113 +69,111 @@ package "Model" {
 
 # Model & Extensions - class diagram
 
-```mermaid
-classDiagram
+```plantuml
 
-	direction LR
+@startuml
+left to right direction
+package Model {
+    class Board {
+        <<struct>>
+        +nbRows : Int
+        +nbColumns : Int
+        +init?(grid:[[Cell]])
+        +countPieces(owner:Owner) : Int
+        +countPieces() : (Int, Int)
+        +insert(piece:Piece, row:Int, column:Int) : BoardResult
+        +removePiece(row:Int, column:Int) : BoardResult
+    }
 
-    namespace Model{
+    class Cell {
+        <<struct>>
+        +init(type:CellType, owner:Owner, piece:Piece?)
+    }
+    
+    class CellType {
+        <<enum>>
+        unknown
+        jungle
+        water
+        trap
+        den
+    }
 
-        class Board {
-            <<struct>>
-            +nbRows : Int
-            +nbColumns : Int
-            +init?(grid:[[Cell]])
-            +countPieces(owner:Owner) Int
-            +countPieces() :(Int, Int)
-            +insert(piece:Piece, row:Int, column:Int) BoardResult
-            +removePiece(row:Int, column:Int) BoardResult
-        }
-
-        class Cell {
-            <<struct>>
-            +init(type:CellType, owner:Owner, piece:Piece?)
-        }
-        
-        class CellType {
-            <<enum>>
-            unknown
-            jungle
-            water
-            trap
-            den
-        }
-
-        class Owner {
-            noOne
-            player1
-            player2
-        }
-        
-        class BoardResult {
+    class Owner {
+        noOne
+        player1
+        player2
+    }
+    
+    class BoardResult {
         <<enum>>
         unknown
         ok
         failed(reason:BoardFailingReason)
-        }
-        
-        class BoardFailingReason {
+    }
+    
+    class BoardFailingReason {
         <<enum>>
         unknown
         outOfBounds
         cellNotEmpty
         cellEmpty
-        }
-        
-        class Animal {
-            <<enum>>
-            rat
-            cat
-            dog
-            wolf
-            leopard
-            tiger
-            lion
-            elephant
-        }
-        
-        class Piece {
-            <<struct>>
-            +init(owner:Owner, animal:Animal)
-        }
     }
 
-    Cell --> "1" CellType : cellType
-    Cell --> "1" Owner : initialOwner
-
-    Board -->  Cell : grid [[]]
-
-    Board ..> BoardResult
-    BoardResult ..> BoardFailingReason
-
-    Piece --> "1" Owner : owner
-    Piece --> "1" Animal : animal
-
-    Cell --> "?" Piece : piece
-
-    namespace CommandLineExt{
-
-        class CellTypeCmdExt{
-            +symbol:String
-        }
-
-        class OwnerCmdExt{
-            +symbol:String
-        }
-
-        class AnimalCmdExt{
-            +symbol:String
-        }
-
-        class BoardCmdExt{
-            +descritpion:String
-        }
+    class Animal {
+        <<enum>>
+        rat
+        cat
+        dog
+        wolf
+        leopard
+        tiger
+        lion
+        elephant
     }
+    
+    class Piece {
+        <<struct>>
+        +init(owner:Owner, animal:Animal)
+    }
+}
 
-    CellType <|-- CellTypeCmdExt
-    Owner <|-- OwnerCmdExt
-    Animal <|-- AnimalCmdExt
-    Board <|-- BoardCmdExt
+Cell --> "1" CellType : cellType
+Cell --> "1" Owner : initialOwner
+Board -->  Cell : grid [[]]
+
+Board ..> BoardResult
+BoardResult ..> BoardFailingReason
+
+Piece --> "1" Owner : owner
+Piece --> "1" Animal : animal
+Cell --> "?" Piece : piece
+
+package CommandLineExt {
+    class CellTypeCmdExt {
+        +symbol:String
+    }
+    
+    class OwnerCmdExt {
+        +symbol:String
+    }
+    
+    class AnimalCmdExt {
+        +symbol:String
+    }
+    
+    class BoardCmdExt {
+        +description:String
+    }
+}
+
+CellType <|-- CellTypeCmdExt
+Owner <|-- OwnerCmdExt
+Animal <|-- AnimalCmdExt
+Board <|-- BoardCmdExt
+
+@enduml
+
 ```
 
 # Author

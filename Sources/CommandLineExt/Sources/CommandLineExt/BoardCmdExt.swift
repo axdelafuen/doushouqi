@@ -20,9 +20,9 @@ extension Board : CustomStringConvertible{
                     board += piece.animal.symbol + piece.owner.symbol
                 }
                 else {
-                    board += "    "
+                    board += "\t"
                 }
-                board += " "
+                board += "\t"
             }
             board += "\n"
         }

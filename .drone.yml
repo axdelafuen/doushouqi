@@ -17,3 +17,9 @@ steps:
       - cd ../CommandLineTest/
       - swift build
 
+  - name: tests
+    image: swift:latest
+    commands:
+      - cd ./Sources/Model/
+      - swift test
+    depends_on: [build]

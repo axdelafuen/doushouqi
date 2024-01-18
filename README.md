@@ -42,9 +42,137 @@ cd ./Sources/Model/
 swift test
 ```
 
-# Architecture
+# Architecture diagram
 
-TODO()
+```plantuml
+@startuml
+package "CommandLineTest" {
+  node "Command Line Tool" 
+}
+
+package "CommandLineExt" {
+  node "Model Classes Extensions"
+}
+
+"CommandLineTest" --> "CommandLineExt"
+"CommandLineTest" --> "Model"
+
+package "Model" {
+  node "Model Classes"
+  node "Tests Model Classes"
+}
+
+"Model Classes Extensions" --|> "Model Classes"
+
+@enduml
+```
+
+# Model & Extensions - class diagram
+
+```mermaid
+classDiagram
+	direction LR
+    namespace Model{
+        class Board {
+            <<struct>>
+            +nbRows : Int
+            +nbColumns : Int
+            +init?(grid:[[Cell]])
+            +countPieces(owner:Owner) Int
+            +countPieces() :(Int, Int)
+            +insert(piece:Piece, row:Int, column:Int) BoardResult
+            +removePiece(row:Int, column:Int) BoardResult
+        }
+
+        class Cell {
+            <<struct>>
+            +init(type:CellType, owner:Owner, piece:Piece?)
+        }
+        
+        class CellType {
+            <<enum>>
+            unknown
+            jungle
+            water
+            trap
+            den
+        }
+
+        class Owner {
+            noOne
+            player1
+            player2
+        }
+        
+        class BoardResult {
+        <<enum>>
+        unknown
+        ok
+        failed(reason:BoardFailingReason)
+        }
+        
+        class BoardFailingReason {
+        <<enum>>
+        unknown
+        outOfBounds
+        cellNotEmpty
+        cellEmpty
+        }
+        
+        
+
+
+        class Animal {
+            <<enum>>
+            rat
+            cat
+            dog
+            wolf
+            leopard
+            tiger
+            lion
+            elephant
+        }
+        
+        class Piece {
+            <<struct>>
+            +init(owner:Owner, animal:Animal)
+        }
+        
+        
+    }
+
+    Cell --> "1" CellType : cellType
+    Cell --> "1" Owner : initialOwner
+    Board -->  Cell : grid [[]]
+
+    Board ..> BoardResult
+    BoardResult ..> BoardFailingReason
+
+    Piece --> "1" Owner : owner
+    Piece --> "1" Animal : animal
+    Cell --> "?" Piece : piece
+
+    namespace CommandLineExt{
+        class CellTypeCmdExt{
+            +symbol:String
+        }
+        class OwnerCmdExt{
+            +symbol:String
+        }
+        class AnimalCmdExt{
+            +symbol:String
+        }
+        class BoardCmdExt{
+            +descritpion:String
+        }
+    }
+
+    CellType <|-- CellTypeCmdExt
+    Owner <|-- OwnerCmdExt
+    Animal <|-- AnimalCmdExt
+    Board <|-- BoardCmdExt
+```
 
 # Author
 

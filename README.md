@@ -74,7 +74,7 @@ package "Model" {
 ```plantuml
 
 @startuml
-left to right direction
+
 package Model {
     struct Board {
         <<struct>>
@@ -133,6 +133,78 @@ package Model {
     struct Piece {
         +init(owner:Owner, animal:Animal)
     }
+
+    package Rules <<Rectangle>> {
+       interface Rules <<protocol>> {
+	    {static} +createBoard() Board
+	    {static} +checkBoard(b: Board)
+	    +getNextPlayer() Owner
+	    +getMoves(Board, Owner) Array~Move~
+	    +getMoves(Board, Owner, Int, Int) Array~Move~
+	    +isMoveValid(Board, Int, Int, Int, Int) Bool
+	    +isMoveValid(Board, Move) Bool
+	    +isGameOver(Board, Int, Int) : (Bool, Result)  
+	    +playedMove(Move, Board, Board)
+	    +occurences : [Board:Int]
+	    +historic: [Move]
+	}
+
+	struct ClassicRules {
+
+        }
+
+        struct VerySimpleRules {
+
+        }
+
+	Rules <|.. ClassicRules
+	Rules <|.. VerySimpleRules
+	
+	struct Move {
+	    +owner: Owner
+	    +rowOrigin: Int
+	    +columnOrigin: Int
+	    +rowDestination: Int
+	    +columnDestination: Int
+	}
+	
+	enum Result {
+	    notFinished
+	    even
+	    winner(Owner, WinningReason)
+	}
+
+	enum WinningReason {
+	    unknown
+	    denReached
+	    noMorePieces
+	    tooManyOccurences
+	    noMovesLeft
+	}
+
+	Result ..> WinningReason
+	Rules ..> Move
+	Rules ..> Result
+	Rules ..> Board
+	
+	enum InvalidBoardError {
+	    badDimensions(Int, Int)
+	    badCellType(CellType,Int,Int)
+	    multipleOccurencesOfSamePiece(Piece)
+	    pieceWithNoOwner(Piece)
+	    pieceNotAllowedOnThisCell(Piece, Cell)
+	}
+
+	ClassicRules ..> InvalidBoardError
+	VerySimpleRules ..> InvalidBoardError
+	
+	enum GameError {
+	    invalidMove
+	}
+
+	ClassicRules ..> GameError
+	VerySimpleRules ..> GameError
+    }
 }
 
 Cell --> "1" CellType : cellType
@@ -147,6 +219,10 @@ Piece --> "1" Animal : animal
 Cell --> "?" Piece : piece
 
 package CommandLineExt {
+    struct BoardCmdExt {
+        +description:String
+    }
+
     struct CellTypeCmdExt {
         +symbol:String
     }
@@ -158,16 +234,12 @@ package CommandLineExt {
     struct AnimalCmdExt {
         +symbol:String
     }
-    
-    struct BoardCmdExt {
-        +description:String
-    }
 }
 
+Board <|-- BoardCmdExt
 CellType <|-- CellTypeCmdExt
 Owner <|-- OwnerCmdExt
 Animal <|-- AnimalCmdExt
-Board <|-- BoardCmdExt
 
 @enduml
 

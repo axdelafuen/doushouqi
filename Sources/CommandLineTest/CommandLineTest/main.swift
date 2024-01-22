@@ -131,6 +131,30 @@ func debugTp2(){
     }
 }
 
+func debugTp3(){
+    let board = VerySimpleRules.createBoard()
+    
+    print(board)
+    
+    do {
+        try VerySimpleRules.checkBoard(board: board)
+        print("No errors")
+    }catch InvalidBoardError.badCellType(_, _, _) {
+        print("Bad cell type")
+    }catch InvalidBoardError.badDimensions(_, _) {
+        print("Bad cell dimension")
+    }catch InvalidBoardError.multipleOccurencesOfSamePiece(_) {
+        print("multiple occurences of same piece")
+    }catch InvalidBoardError.pieceNotAllowedOnThisCell(_, _) {
+        print("Piece not allowed on this cell")
+    }catch InvalidBoardError.pieceWithNoOwner(_) {
+        print("Piece with no owner")
+    }catch {
+        print("Unknown error")
+    }
+}
+
 // call functions
 //debugTp1()
-debugTp2()
+//debugTp2()
+debugTp3()

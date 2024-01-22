@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct Board {
+public struct Board : Hashable{
     
     public let nbRows:Int
     

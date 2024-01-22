@@ -48,8 +48,8 @@ swift test
 @startuml
 left to right direction
 
-"CommandLineTest" --> "CommandLineExt"
-"CommandLineTest" --> "Model"
+"CommandLineTest" ..> "CommandLineExt"
+"CommandLineTest" ..> "Model"
 
 package "CommandLineTest" {
   node "Command Line Tool" 

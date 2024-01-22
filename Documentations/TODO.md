@@ -10,10 +10,26 @@
 
 - [x] ajouter des nom differents sur des parametres de méthode, pour l appel -> **fait pour ajouter/supr piece**
 
-- [ ] savoir expliquer les méthodes d'extensions des collections (Closure, cf. Code#)
+- [x] savoir expliquer les méthodes d'extensions des collections (Closure, cf. Code#)
 
 - [x] faire des tests plus "complet", vérifier si ca retourne bien "ok" pas sufisant
 
 - [x] changer le equatable (trop complexe pour rien)
 
 - [x] faire des tests paramétré
+
+# TP3
+
+- [ ] Refactor and finish `checkboard()`
+
+- [ ] Handle the return value of `createBoard()` (without "!")
+
+- [ ] Update class diagram with my own attributes names
+
+- [ ] Add tests to increase test coverage, up to 90%
+
+- [ ] Check if the return value of `isGameOver()`, are the corect one (noOne sometimes ??)
+
+- [ ] write both `getMoves()` methods
+
+- [ ] `Move` class should inherit from `CustomStringConvertible`, and have the `description` attributes

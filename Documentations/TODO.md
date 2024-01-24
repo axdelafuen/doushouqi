@@ -22,7 +22,7 @@
 
 - [ ] Refactor and finish `checkboard()`
 
-- [ ] Handle the return value of `createBoard()` (without "!")
+- [x] Handle the return value of `createBoard()`
 
 - [ ] Update class diagram with my own attributes names
 
@@ -30,6 +30,6 @@
 
 - [ ] Check if the return value of `isGameOver()`, are the corect one (noOne sometimes ??)
 
-- [ ] write both `getMoves()` methods
+- [x] write both `getMoves()` methods
 
-- [ ] `Move` class should inherit from `CustomStringConvertible`, and have the `description` attributes
+- [x] `Move` class should inherit from `CustomStringConvertible`, and have the `description` attributes

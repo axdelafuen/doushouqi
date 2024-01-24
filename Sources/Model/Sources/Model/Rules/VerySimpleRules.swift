@@ -8,17 +8,19 @@
 import Foundation
 
 public struct VerySimpleRules : Rules {
-    public var occurences: [Board : Int]
+    public var occurences: [Board : Int] = Dictionary()
     
-    public var historic: [Move]
+    public var historic: [Move] = Array()
+    
+    public init() {}
     
     public static func createBoard() -> Board {
-        return Board(grid:[
-                        [Cell(cellType: CellType.jungle, owner:Owner.player1, piece: Piece(owner: Owner.player1, animal: Animal.lion)),
-                         Cell(cellType: CellType.jungle),
+        let board = Board(grid:[
+                        [Cell(cellType: CellType.jungle),
+                         Cell(cellType: CellType.jungle, owner:Owner.player1, piece: Piece(owner: Owner.player1, animal: Animal.lion)),
                          Cell(cellType: CellType.den),
-                         Cell(cellType: CellType.jungle),
                          Cell(cellType: CellType.jungle, owner:Owner.player1, piece: Piece(owner: Owner.player1, animal: Animal.tiger)),
+                         Cell(cellType: CellType.jungle)
                         ],
                         [Cell(cellType: CellType.jungle, owner:Owner.player1, piece: Piece(owner: Owner.player1, animal: Animal.rat)),
                          Cell(cellType: CellType.jungle),
@@ -38,14 +40,17 @@ public struct VerySimpleRules : Rules {
                          Cell(cellType: CellType.jungle),
                          Cell(cellType: CellType.jungle, owner:Owner.player2, piece: Piece(owner: Owner.player2, animal: Animal.rat))
                         ],
-                        [Cell(cellType: CellType.jungle, owner:Owner.player2, piece: Piece(owner: Owner.player2, animal: Animal.tiger)),
-                         Cell(cellType: CellType.jungle),
+                        [Cell(cellType: CellType.jungle),
+                         Cell(cellType: CellType.jungle, owner:Owner.player2, piece: Piece(owner: Owner.player2, animal: Animal.tiger)),
                          Cell(cellType: CellType.den),
-                         Cell(cellType: CellType.jungle),
                          Cell(cellType: CellType.jungle, owner:Owner.player2, piece: Piece(owner: Owner.player2, animal: Animal.lion)),
+                         Cell(cellType: CellType.jungle)
                         ]
-        ])! // TO HANDLE CORRECTLY !
-            // TEST IT WITH "checkBoard" ?
+        ])
+        if let board {
+            return board
+        }
+        return Board(grid:[[Cell(cellType: CellType.unknown)],[Cell(cellType: CellType.unknown)]])!
     }
     
     /*
@@ -54,7 +59,7 @@ public struct VerySimpleRules : Rules {
     public static func checkBoard(board: Board) throws {
         // Check board size (row x column)
         if board.nbColumns != 5 || board.nbRows != 5 { throw InvalidBoardError.badDimensions(board.nbColumns, board.nbColumns) }
-        
+                
         // Check if CellType "den" is at the right place
         if board.grid[0][2].cellType != CellType.den { throw InvalidBoardError.badCellType(board.grid[0][2].cellType, 0, 2) }
         if board.grid[4][2].cellType != CellType.den { throw InvalidBoardError.badCellType(board.grid[4][2].cellType, 4, 2) }
@@ -65,7 +70,7 @@ public struct VerySimpleRules : Rules {
                 if ( row != 0 && column != 2 ) || ( row != 4 && column != 2 ) {
                     if board.grid[row][column].cellType != CellType.jungle {
                        throw InvalidBoardError.badCellType(board.grid[row][column].cellType, row, column)
-                   }
+                    }
                 }
              }
         }
@@ -78,14 +83,6 @@ public struct VerySimpleRules : Rules {
                     if !set.insert(piece).inserted {
                         throw InvalidBoardError.multipleOccurencesOfSamePiece(piece)
                     }
-                }
-            }
-        }
-        
-        // Check if some pieces have no owners
-        for row in board.grid {
-            for cell in row {
-                if let piece = cell.piece {
                     if piece.owner == Owner.noOne {
                         throw InvalidBoardError.pieceWithNoOwner(piece)
                     }
@@ -100,22 +97,64 @@ public struct VerySimpleRules : Rules {
     }
     
     public func getNextPlayer() -> Owner {
-        if let owner = historic.last?.owner {
-            return owner
+        if let lastMove = historic.last{
+            if lastMove.owner == Owner.player1 {
+                return Owner.player2
+            }
         }
-        return Owner.noOne
+        return Owner.player1
     }
     
     public func getMoves(board: Board, owner: Owner) -> Array<Move> {
-        return [Move(owner: Owner.noOne, rowOrigin: 0, columnOrigin: 0, rowDestination: 0, columnDestination: 1)]
+        
+        var moves:[Move] = Array()
+        
+        for row in 0...4 {
+            for column in 0...4 {
+                if board.grid[row][column].piece?.owner == owner {
+                    moves.append(contentsOf: getMoves(board: board, owner: owner, row: row, column: column))
+                }
+             }
+        }
+        
+        return moves
     }
     
     public func getMoves(board: Board, owner: Owner, row: Int, column: Int) -> Array<Move> {
-        return [Move(owner: Owner.noOne, rowOrigin: 0, columnOrigin: 0, rowDestination: 0, columnDestination: 1)]
+        
+        if board.grid[row][column].piece?.owner != owner {
+            return Array()
+        }
+        
+        var moves:[Move] = Array()
+        
+        let moveTop:Move = Move(owner: owner, rowOrigin: row, columnOrigin: column, rowDestination: row, columnDestination: column+1)
+        let moveBottom:Move = Move(owner: owner, rowOrigin: row, columnOrigin: column, rowDestination: row, columnDestination: column-1)
+        let moveRight:Move = Move(owner: owner, rowOrigin: row, columnOrigin: column, rowDestination: row+1, columnDestination: column)
+        let moveLeft:Move = Move(owner: owner, rowOrigin: row, columnOrigin: column, rowDestination: row-1, columnDestination: column)
+
+        if isMoveValid(board: board, move: moveTop) {
+            moves.append(moveTop)
+        }
+        if isMoveValid(board: board, move: moveBottom) {
+            moves.append(moveBottom)
+        }
+        if isMoveValid(board: board, move: moveRight) {
+            moves.append(moveRight)
+        }
+        if isMoveValid(board: board, move: moveLeft) {
+            moves.append(moveLeft)
+        }
+        
+        return moves
     }
     
     public func isMoveValid(board: Board, rowOrigin: Int, columnOrigin: Int, rowDestination: Int, columnDestination: Int) -> Bool {
-        if rowDestination > board.nbRows || columnDestination > board.nbColumns {
+        guard let _ = board.grid[rowOrigin][columnOrigin].piece else {
+            return false
+        }
+        
+        if rowDestination > board.nbRows-1 || columnDestination > board.nbColumns-1 || rowDestination < 0 || columnDestination < 0 {
             return false
         }
         
@@ -163,9 +202,10 @@ public struct VerySimpleRules : Rules {
 
         // too many occurrences
         if (occurences.values.contains { $0 >= 3 }) {
-            // IS IT NO ONE ?
-            // IS IT NO ONE ?
-            return (true, Result.winner(owner: Owner.noOne, winningReason: WinningReason.tooManyOccurences))
+            if getNextPlayer() == Owner.player1 {
+                return (true, Result.winner(owner: Owner.player2, winningReason: WinningReason.tooManyOccurences))
+            }
+            return (true, Result.winner(owner: Owner.player1, winningReason: WinningReason.tooManyOccurences))
         }
         
         // no more moves

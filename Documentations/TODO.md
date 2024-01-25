@@ -24,7 +24,7 @@
 
 - [x] Handle the return value of `createBoard()`
 
-- [ ] Update class diagram with my own attributes names
+- [x] Update class diagram with my own attributes names
 
 - [x] Add tests to increase test coverage, up to 90%
 

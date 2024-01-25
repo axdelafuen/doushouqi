@@ -15,7 +15,7 @@ public struct VerySimpleRules : Rules {
     public init() {}
     
     public static func createBoard() -> Board {
-        let board = Board(grid:[
+        return Board(grid:[
                         [Cell(cellType: CellType.jungle),
                          Cell(cellType: CellType.jungle, owner:Owner.player1, piece: Piece(owner: Owner.player1, animal: Animal.lion)),
                          Cell(cellType: CellType.den),
@@ -46,13 +46,9 @@ public struct VerySimpleRules : Rules {
                          Cell(cellType: CellType.jungle, owner:Owner.player2, piece: Piece(owner: Owner.player2, animal: Animal.lion)),
                          Cell(cellType: CellType.jungle)
                         ]
-        ])
-        return board!
+        ])!
     }
     
-    /*
-    * TO REFACTOR !!!!!
-    */
     public static func checkBoard(board: Board) throws {
         // Check board size (row x column)
         if board.nbColumns != 5 || board.nbRows != 5 { throw InvalidBoardError.badDimensions(board.nbColumns, board.nbColumns) }
@@ -61,8 +57,15 @@ public struct VerySimpleRules : Rules {
         for row in 0...4 {
             for column in 0...4 {
                 if ( row == 0 && column == 2 ) || ( row == 4 && column == 2 ) {
+                    // Check if den is in correct Cell
                     if board.grid[row][column].cellType != CellType.den {
                        throw InvalidBoardError.badCellType(board.grid[row][column].cellType, row, column)
+                    }
+                    // Check if a piece is not on his own, den
+                    if let piece = board.grid[row][column].piece{
+                        if board.grid[row][column].initialOwner == piece.owner {
+                            throw InvalidBoardError.pieceNotAllowedOnThisCell(piece, board.grid[row][column])
+                        }
                     }
                 }
                 else if board.grid[row][column].cellType != CellType.jungle {
@@ -85,13 +88,9 @@ public struct VerySimpleRules : Rules {
                 }
             }
         }
-        
-        // Check if there is pieces none allowed pieces
-        // TODO
-        //throw InvalidBoardError.pieceNotAllowedOnThisCell(<#T##Piece#>, <#T##Cell#>)
-        
     }
     
+    // Get the next player
     public func getNextPlayer() -> Owner {
         if let lastMove = historic.last{
             if lastMove.owner == Owner.player1 {
@@ -222,6 +221,7 @@ public struct VerySimpleRules : Rules {
         return (false, Result.notFinished)
     }
     
+    // add the old board & new board to historic
     mutating public func playedMove(move: Move, oldBoard: Board, newBoard: Board) {
         historic.append(move)
     }

@@ -20,7 +20,7 @@
 
 # TP3
 
-- [ ] Refactor and finish `checkboard()`
+- [x] Refactor and finish `checkboard()`
 
 - [x] Handle the return value of `createBoard()`
 
@@ -33,11 +33,3 @@
 - [x] write both `getMoves()` methods
 
 - [x] `Move` class should inherit from `CustomStringConvertible`, and have the `description` attributes
-
-### Question :
-
-InvalidBoardError.pieceNotAllowedOnThisCell ?? qu est ce ?
-
-createBoard => faut il forcer le retour du board ? ou le check avant de return ?
-
-modif Board = hashable a cause du protocole Rules ?

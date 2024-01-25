@@ -137,14 +137,14 @@ package Model {
     package Rules <<Rectangle>> {
        interface Rules <<protocol>> {
 	    {static} +createBoard(): Board
-	    {static} +checkBoard(b: Board)
+	    {static} +checkBoard(board: Board)
 	    +getNextPlayer() : Owner
-	    +getMoves(Board, Owner): Array<Move>
-	    +getMoves(Board, Owner, Int, Int): Array<Move>
-	    +isMoveValid(Board, Int, Int, Int, Int): Bool
-	    +isMoveValid(Board, Move): Bool
-	    +isGameOver(Board, Int, Int): (Bool, Result)  
-	    +playedMove(Move, Board, Board)
+	    +getMoves(board: Board, owner: Owner): Array<Move>
+	    +getMoves(board: Board, owner: Owner, row: Int, column: Int): Array<Move>
+	    +isMoveValid(board: Board, rowOrigin: Int, columnOrigin: Int, rowDest: Int, columnDest: Int): Bool
+	    +isMoveValid(board: Board, move: Move): Bool
+	    +isGameOver(board: Board, row: Int, column: Int): (Bool, Result)  
+	    +playedMove(move: Move, oldBoard: Board, newBoard: Board)
 	    +occurences : [Board: Int]
 	    +historic: [Move]
 	}

@@ -146,19 +146,24 @@ public struct VerySimpleRules : Rules {
     
     public func isMoveValid(board: Board, rowOrigin: Int, columnOrigin: Int, rowDestination: Int, columnDestination: Int) -> Bool {
         
+        // Verif is not out of bounds
+        if rowDestination > board.nbRows-1 || columnDestination > board.nbColumns-1 || rowDestination < 0 || columnDestination < 0 {
+            return false
+        }
+        
+        // Verify that the move is at valid distance
         if ( rowOrigin + 1 != rowDestination && rowOrigin - 1 != rowDestination && rowOrigin-rowDestination != 0 )
         || ( columnOrigin + 1 != columnDestination && columnOrigin - 1 != columnDestination && columnOrigin-columnDestination != 0 ) {
             return false
         }
         
+        // Verify that there is a pieces at the origin
         guard let _ = board.grid[rowOrigin][columnOrigin].piece else {
             return false
         }
         
-        if rowDestination > board.nbRows-1 || columnDestination > board.nbColumns-1 || rowDestination < 0 || columnDestination < 0 {
-            return false
-        }
-        
+        // Verify that there is no pieces on dest cell or if it s possible to eat it
+        // NEED TO CHECK THE VALUE OF THE PIECES, TO MOVE
         if let _ = board.grid[rowDestination][columnDestination].piece {
             return false
         }

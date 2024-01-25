@@ -33,3 +33,5 @@
 - [x] write both `getMoves()` methods
 
 - [x] `Move` class should inherit from `CustomStringConvertible`, and have the `description` attributes
+
+- [ ] Check the dest cell, if it s possible to eat it (`isMoveValid()`)

@@ -136,16 +136,16 @@ package Model {
 
     package Rules <<Rectangle>> {
        interface Rules <<protocol>> {
-	    {static} +createBoard() Board
+	    {static} +createBoard(): Board
 	    {static} +checkBoard(b: Board)
-	    +getNextPlayer() Owner
-	    +getMoves(Board, Owner) Array~Move~
-	    +getMoves(Board, Owner, Int, Int) Array~Move~
-	    +isMoveValid(Board, Int, Int, Int, Int) Bool
-	    +isMoveValid(Board, Move) Bool
-	    +isGameOver(Board, Int, Int) : (Bool, Result)  
+	    +getNextPlayer() : Owner
+	    +getMoves(Board, Owner): Array<Move>
+	    +getMoves(Board, Owner, Int, Int): Array<Move>
+	    +isMoveValid(Board, Int, Int, Int, Int): Bool
+	    +isMoveValid(Board, Move): Bool
+	    +isGameOver(Board, Int, Int): (Bool, Result)  
 	    +playedMove(Move, Board, Board)
-	    +occurences : [Board:Int]
+	    +occurences : [Board: Int]
 	    +historic: [Move]
 	}
 
@@ -153,9 +153,9 @@ package Model {
 
         }
 
-        struct VerySimpleRules {
+    struct VerySimpleRules {
 
-        }
+    }
 
 	Rules <|.. ClassicRules
 	Rules <|.. VerySimpleRules
@@ -187,7 +187,7 @@ package Model {
 	Rules ..> Result
 	Rules ..> Board
 	
-	enum InvalidBoardError {
+	exception InvalidBoardError <<enum>> {
 	    badDimensions(Int, Int)
 	    badCellType(CellType,Int,Int)
 	    multipleOccurencesOfSamePiece(Piece)
@@ -198,7 +198,7 @@ package Model {
 	ClassicRules ..> InvalidBoardError
 	VerySimpleRules ..> InvalidBoardError
 	
-	enum GameError {
+	exception GameError <<enum >> {
 	    invalidMove
 	}
 

@@ -26,10 +26,18 @@
 
 - [ ] Update class diagram with my own attributes names
 
-- [ ] Add tests to increase test coverage, up to 90%
+- [x] Add tests to increase test coverage, up to 90%
 
-- [ ] Check if the return value of `isGameOver()`, are the corect one (noOne sometimes ??)
+- [x] Check if the return value of `isGameOver()`, are the corect one (noOne sometimes ??)
 
 - [x] write both `getMoves()` methods
 
 - [x] `Move` class should inherit from `CustomStringConvertible`, and have the `description` attributes
+
+### Question :
+
+InvalidBoardError.pieceNotAllowedOnThisCell ?? qu est ce ?
+
+createBoard => faut il forcer le retour du board ? ou le check avant de return ?
+
+modif Board = hashable a cause du protocole Rules ?

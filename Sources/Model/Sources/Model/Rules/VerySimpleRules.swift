@@ -47,10 +47,7 @@ public struct VerySimpleRules : Rules {
                          Cell(cellType: CellType.jungle)
                         ]
         ])
-        if let board {
-            return board
-        }
-        return Board(grid:[[Cell(cellType: CellType.unknown)],[Cell(cellType: CellType.unknown)]])!
+        return board!
     }
     
     /*
@@ -59,23 +56,22 @@ public struct VerySimpleRules : Rules {
     public static func checkBoard(board: Board) throws {
         // Check board size (row x column)
         if board.nbColumns != 5 || board.nbRows != 5 { throw InvalidBoardError.badDimensions(board.nbColumns, board.nbColumns) }
-                
-        // Check if CellType "den" is at the right place
-        if board.grid[0][2].cellType != CellType.den { throw InvalidBoardError.badCellType(board.grid[0][2].cellType, 0, 2) }
-        if board.grid[4][2].cellType != CellType.den { throw InvalidBoardError.badCellType(board.grid[4][2].cellType, 4, 2) }
         
         // Check if every CellType is "jungle" except for the "den" Cells
         for row in 0...4 {
             for column in 0...4 {
-                if ( row != 0 && column != 2 ) || ( row != 4 && column != 2 ) {
-                    if board.grid[row][column].cellType != CellType.jungle {
+                if ( row == 0 && column == 2 ) || ( row == 4 && column == 2 ) {
+                    if board.grid[row][column].cellType != CellType.den {
                        throw InvalidBoardError.badCellType(board.grid[row][column].cellType, row, column)
                     }
+                }
+                else if board.grid[row][column].cellType != CellType.jungle {
+                        throw InvalidBoardError.badCellType(board.grid[row][column].cellType, row, column)
                 }
              }
         }
         
-        // Check if multiple occurences of same pieces
+        // Check if multiple occurences of same pieces or pieces with no owner
         var set:Set<Piece> = Set()
         for row in board.grid {
             for cell in row {
@@ -150,6 +146,12 @@ public struct VerySimpleRules : Rules {
     }
     
     public func isMoveValid(board: Board, rowOrigin: Int, columnOrigin: Int, rowDestination: Int, columnDestination: Int) -> Bool {
+        
+        if ( rowOrigin + 1 != rowDestination && rowOrigin - 1 != rowDestination && rowOrigin-rowDestination != 0 )
+        || ( columnOrigin + 1 != columnDestination && columnOrigin - 1 != columnDestination && columnOrigin-columnDestination != 0 ) {
+            return false
+        }
+        
         guard let _ = board.grid[rowOrigin][columnOrigin].piece else {
             return false
         }

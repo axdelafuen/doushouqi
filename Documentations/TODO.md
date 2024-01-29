@@ -35,3 +35,13 @@
 - [x] `Move` class should inherit from `CustomStringConvertible`, and have the `description` attributes
 
 - [x] Check the dest cell, if it s possible to eat it (`isMoveValid()`)
+
+# TP 4
+
+- [ ] Update class diagram
+
+- [ ] There is some bugs in the game function (some pieces are not moved corectly) -> cf. `main.swift`
+
+- [ ] Write `HumanePlayer` methods
+
+- [ ] Write test for `Model` (up to 90%)

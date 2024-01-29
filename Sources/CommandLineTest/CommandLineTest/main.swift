@@ -153,7 +153,7 @@ func debugTp3(){
         print("Unknown error")
     }
     
-    var rules:VerySimpleRules = VerySimpleRules()
+    let rules:VerySimpleRules = VerySimpleRules()
     
     print(rules.getMoves(board: board, owner: Owner.player1))
     
@@ -162,7 +162,7 @@ func debugTp3(){
     print(rules.getMoves(board: board, owner: Owner.player1, row: 0, column: 1))
     
     let move:Move = Move(owner: rules.getNextPlayer(), rowOrigin: 0, columnOrigin: 1, rowDestination: 1, columnDestination: 1)
-    //print(rules.isMoveValid(board: board, move: move))
+    print(rules.isMoveValid(board: board, move: move))
     
     // 1
     //print(rules.getNextPlayer())
@@ -180,7 +180,67 @@ func debugTp3(){
     
 }
 
+public func debugTp4() {
+    let board = VerySimpleRules.createBoard()
+    
+    print(board)
+    
+    let sa:Player? = RandomPlayer(name: "Supidité Artificielle", id: Owner.player1)
+    
+    if let sa {
+        print(sa.chooseMove(board: board, rules: VerySimpleRules()))
+    }
+
+    //let player:Player? = HumanPlayer(name: "GROSLARDON", id: Owner.player2, inputMethod: )
+}
+
 // call functions
 //debugTp1()
 //debugTp2()
-debugTp3()
+//debugTp3()
+//debugTp4()
+
+
+public func dumb_AI_Game() async throws {
+    var board = VerySimpleRules.createBoard()
+    var rules = VerySimpleRules()
+    let dumb1 = RandomPlayer(name: "STUPID 1", id: Owner.player1)!
+    let dumb2 = RandomPlayer(name: "STUPID 2", id: Owner.player2)!
+    
+    var counter = 1
+    
+    var gameOver:(Bool, Result) = (false, Result.notFinished)
+    while(!gameOver.0) {
+        print("---------- Tour : ", counter, "(", rules.getNextPlayer(),")" , " ----------")
+        print(board)
+        if rules.getNextPlayer() == dumb1.id {
+            let move = dumb1.chooseMove(board: board, rules: rules)
+            let oldBoard = board
+            
+            _ = board.removePiece(atRow: move.rowDestination, andColumn: move.columnDestination)
+            _ = board.insert(piece: board.grid[move.rowOrigin][move.columnOrigin].piece!, atRow: move.rowDestination, andColumn: move.columnDestination)
+            _ = board.removePiece(atRow: move.rowOrigin, andColumn: move.columnOrigin)
+            
+            rules.playedMove(move: move, oldBoard: oldBoard, newBoard: board)
+
+            gameOver = rules.isGameOver(board: board, row: move.rowDestination, column: move.columnDestination)
+        }
+        else {
+            let move = dumb2.chooseMove(board: board, rules: rules)
+            let oldBoard = board
+            
+            _ = board.removePiece(atRow: move.rowDestination, andColumn: move.columnDestination)
+            _ = board.insert(piece: board.grid[move.rowOrigin][move.columnOrigin].piece!, atRow: move.rowDestination, andColumn: move.columnDestination)
+            _ = board.removePiece(atRow: move.rowOrigin, andColumn: move.columnOrigin)
+            
+            rules.playedMove(move: move, oldBoard: oldBoard, newBoard: board)
+            
+            gameOver = rules.isGameOver(board: board, row: move.rowDestination, column: move.columnDestination)
+        }
+        counter += 1
+        try await Task.sleep(nanoseconds: UInt64(0.2 * Double(NSEC_PER_SEC)))
+    }
+    print(gameOver.1)
+}
+
+try await dumb_AI_Game()

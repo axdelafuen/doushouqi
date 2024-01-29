@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct Piece : CustomStringConvertible{
+public struct Piece : CustomStringConvertible, Equatable, Hashable{
     
     public let owner:Owner
     

@@ -48,8 +48,8 @@ swift test
 @startuml
 left to right direction
 
-"CommandLineTest" --> "CommandLineExt"
-"CommandLineTest" --> "Model"
+"CommandLineTest" ..> "CommandLineExt"
+"CommandLineTest" ..> "Model"
 
 package "CommandLineTest" {
   node "Command Line Tool" 
@@ -74,7 +74,7 @@ package "Model" {
 ```plantuml
 
 @startuml
-left to right direction
+
 package Model {
     struct Board {
         <<struct>>
@@ -133,6 +133,78 @@ package Model {
     struct Piece {
         +init(owner:Owner, animal:Animal)
     }
+
+    package Rules <<Rectangle>> {
+       interface Rules <<protocol>> {
+	    {static} +createBoard(): Board
+	    {static} +checkBoard(board: Board)
+	    +getNextPlayer() : Owner
+	    +getMoves(board: Board, owner: Owner): Array<Move>
+	    +getMoves(board: Board, owner: Owner, row: Int, column: Int): Array<Move>
+	    +isMoveValid(board: Board, rowOrigin: Int, columnOrigin: Int, rowDest: Int, columnDest: Int): Bool
+	    +isMoveValid(board: Board, move: Move): Bool
+	    +isGameOver(board: Board, row: Int, column: Int): (Bool, Result)  
+	    +playedMove(move: Move, oldBoard: Board, newBoard: Board)
+	    +occurences : [Board: Int]
+	    +historic: [Move]
+	}
+
+	struct ClassicRules {
+
+        }
+
+    struct VerySimpleRules {
+
+    }
+
+	Rules <|.. ClassicRules
+	Rules <|.. VerySimpleRules
+	
+	struct Move {
+	    +owner: Owner
+	    +rowOrigin: Int
+	    +columnOrigin: Int
+	    +rowDestination: Int
+	    +columnDestination: Int
+	}
+	
+	enum Result {
+	    notFinished
+	    even
+	    winner(Owner, WinningReason)
+	}
+
+	enum WinningReason {
+	    unknown
+	    denReached
+	    noMorePieces
+	    tooManyOccurences
+	    noMovesLeft
+	}
+
+	Result ..> WinningReason
+	Rules ..> Move
+	Rules ..> Result
+	Rules ..> Board
+	
+	exception InvalidBoardError <<enum>> {
+	    badDimensions(Int, Int)
+	    badCellType(CellType,Int,Int)
+	    multipleOccurencesOfSamePiece(Piece)
+	    pieceWithNoOwner(Piece)
+	    pieceNotAllowedOnThisCell(Piece, Cell)
+	}
+
+	ClassicRules ..> InvalidBoardError
+	VerySimpleRules ..> InvalidBoardError
+	
+	exception GameError <<enum >> {
+	    invalidMove
+	}
+
+	ClassicRules ..> GameError
+	VerySimpleRules ..> GameError
+    }
 }
 
 Cell --> "1" CellType : cellType
@@ -147,6 +219,10 @@ Piece --> "1" Animal : animal
 Cell --> "?" Piece : piece
 
 package CommandLineExt {
+    struct BoardCmdExt {
+        +description:String
+    }
+
     struct CellTypeCmdExt {
         +symbol:String
     }
@@ -158,16 +234,12 @@ package CommandLineExt {
     struct AnimalCmdExt {
         +symbol:String
     }
-    
-    struct BoardCmdExt {
-        +description:String
-    }
 }
 
+Board <|-- BoardCmdExt
 CellType <|-- CellTypeCmdExt
 Owner <|-- OwnerCmdExt
 Animal <|-- AnimalCmdExt
-Board <|-- BoardCmdExt
 
 @enduml
 

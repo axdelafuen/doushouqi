@@ -18,7 +18,7 @@ public struct VerySimpleRules : Rules {
         return Board(grid:[
                         [Cell(cellType: CellType.jungle),
                          Cell(cellType: CellType.jungle, owner:Owner.player1, piece: Piece(owner: Owner.player1, animal: Animal.lion)),
-                         Cell(cellType: CellType.den),
+                         Cell(cellType: CellType.den, owner: Owner.player1),
                          Cell(cellType: CellType.jungle, owner:Owner.player1, piece: Piece(owner: Owner.player1, animal: Animal.tiger)),
                          Cell(cellType: CellType.jungle)
                         ],
@@ -42,7 +42,7 @@ public struct VerySimpleRules : Rules {
                         ],
                         [Cell(cellType: CellType.jungle),
                          Cell(cellType: CellType.jungle, owner:Owner.player2, piece: Piece(owner: Owner.player2, animal: Animal.tiger)),
-                         Cell(cellType: CellType.den),
+                         Cell(cellType: CellType.den, owner: Owner.player2),
                          Cell(cellType: CellType.jungle, owner:Owner.player2, piece: Piece(owner: Owner.player2, animal: Animal.lion)),
                          Cell(cellType: CellType.jungle)
                         ]
@@ -158,14 +158,22 @@ public struct VerySimpleRules : Rules {
         }
         
         // Verify that there is a pieces at the origin
-        guard let _ = board.grid[rowOrigin][columnOrigin].piece else {
-            return false
-        }
-        
-        // Verify that there is no pieces on dest cell or if it s possible to eat it
-        // NEED TO CHECK THE VALUE OF THE PIECES, TO MOVE
-        if let _ = board.grid[rowDestination][columnDestination].piece {
-            return false
+        if let pieceOrigin = board.grid[rowOrigin][columnOrigin].piece {
+            // Verify that there not the own den
+            if board.grid[rowDestination][columnDestination].cellType == CellType.den && board.grid[rowDestination][columnDestination].initialOwner == pieceOrigin.owner {
+                return false
+            }
+            // Verify that there is no pieces of the same owner on dest cell or if it s possible to eat it
+            if let pieceDest = board.grid[rowDestination][columnDestination].piece {
+                // is it the opponent piece ?
+                if pieceOrigin.owner == pieceDest.owner {
+                    return false
+                }
+                // is it eatable ?
+                if pieceDest.animal < pieceDest.animal {
+                    return true
+                }
+            }
         }
         
         return true

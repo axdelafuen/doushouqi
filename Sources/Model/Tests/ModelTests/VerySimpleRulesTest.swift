@@ -91,7 +91,7 @@ final class VerySimpleRulesTest: XCTestCase {
     }
     
     func testGetMove() throws {
-        XCTAssertEqual(rules.getMoves(board: validBoard, owner: Owner.player1).count, 16)
+        XCTAssertEqual(rules.getMoves(board: validBoard, owner: Owner.player1).count, 13)
     }
     
     func testGameIsNotOver () throws {

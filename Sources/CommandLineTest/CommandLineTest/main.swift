@@ -162,16 +162,21 @@ func debugTp3(){
     print(rules.getMoves(board: board, owner: Owner.player1, row: 0, column: 1))
     
     let move:Move = Move(owner: rules.getNextPlayer(), rowOrigin: 0, columnOrigin: 1, rowDestination: 1, columnDestination: 1)
-    print(rules.isMoveValid(board: board, move: move))
+    //print(rules.isMoveValid(board: board, move: move))
     
     // 1
-    print(rules.getNextPlayer())
-    rules.playedMove(move: move, oldBoard: board, newBoard: board)
+    //print(rules.getNextPlayer())
+    //rules.playedMove(move: move, oldBoard: board, newBoard: board)
     //2
-    print(rules.getNextPlayer())
+    //print(rules.getNextPlayer())
 
-    
-    
+    // test animals weights
+    if Animal.dog <= Animal.rat {
+        print("success")
+    }
+    else {
+        print("failed")
+    }
     
 }
 

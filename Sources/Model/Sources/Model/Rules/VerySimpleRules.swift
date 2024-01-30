@@ -170,8 +170,8 @@ public struct VerySimpleRules : Rules {
                     return false
                 }
                 // is it eatable ?
-                if pieceDest.animal < pieceDest.animal {
-                    return true
+                if pieceDest.animal > pieceOrigin.animal {
+                    return false
                 }
             }
         }

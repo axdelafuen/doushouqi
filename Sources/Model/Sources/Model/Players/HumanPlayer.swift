@@ -9,15 +9,14 @@ import Foundation
 
 public class HumanPlayer: Player {
     
-    public let input :(HumanPlayer)
+    public let input :() -> Move
     
-    public init?(name: String, id : Owner, inputMethod: (HumanPlayer)){
+    public init?(name: String, id : Owner, inputMethod: @escaping () -> Move){
         self.input = inputMethod
         super.init(name: name, id: id)
     }
     
     override public func chooseMove(board: Board, rules: Rules) -> Move {
-        //TODO
-        fatalError()
+        return self.input()
     }
 }

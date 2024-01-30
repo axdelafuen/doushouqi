@@ -40,7 +40,7 @@
 
 - [ ] Update class diagram
 
-- [ ] There is some bugs in the game function (some pieces are not moved corectly) -> cf. `main.swift`
+- [x] There is some bugs in the game function (some pieces are not moved corectly) -> cf. `main.swift`
 
 - [ ] Write `HumanePlayer` methods
 

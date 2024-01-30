@@ -13,7 +13,7 @@ public class RandomPlayer: Player {
         let moves:[Move] = rules.getMoves(board: board, owner: self.id)
         
         // Choose a random number in moves tab
-        let chosenMoveIndex = Int(arc4random_uniform(UInt32(moves.count-1)))
+        let chosenMoveIndex = Int(UInt32.random(in: 0..<UInt32(moves.count)))
         
         // Return the move
         return moves[chosenMoveIndex]

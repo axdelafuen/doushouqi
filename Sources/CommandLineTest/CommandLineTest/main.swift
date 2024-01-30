@@ -241,6 +241,7 @@ public func dumb_AI_Game() async throws {
         try await Task.sleep(nanoseconds: UInt64(0.2 * Double(NSEC_PER_SEC)))
     }
     print(gameOver.1)
+    print(board)
 }
 
-try await dumb_AI_Game()
+//try await dumb_AI_Game()

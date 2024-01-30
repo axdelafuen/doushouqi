@@ -9,7 +9,7 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     COV_BIN="${COV_BIN}/Contents/MacOS/$f"
 fi
 
-xcrun llvm-cov report \
+llvm-cov report \
     "${COV_BIN}" \
     -instr-profile=.build/debug/codecov/default.profdata \
     -ignore-filename-regex=".build|Tests" \

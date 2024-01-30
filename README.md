@@ -158,7 +158,7 @@ package GameBoard <<Rectangle>> {
 	HumanPlayer --|> Player
     }
 
-    package Rules <<Rectangle>> {
+    package GameRules <<Rectangle>> {
        protocol Rules {
 	    {static} +createBoard() -> Board
 	    {static} +checkBoard(board: Board)
@@ -230,15 +230,15 @@ package GameBoard <<Rectangle>> {
 	VerySimpleRules ..> GameError
     }
 
-package Game <<Rectangle>> {
+package GameManagement <<Rectangle>> {
     struct Game {
         +init(rules:Rules, player1:Player, player2:Player)
         +start()
     }
 }
-Game.Game ..> "1" Rules.Rules : rules
-Game.Game ..> "2" Player : players
-Game.Game ..> "1" Board : board
+Game ..> "1" Rules : rules
+Game ..> "2" Player : players
+Game ..> "1" Board : board
 }
 
 Cell --> "1" CellType : cellType

@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct Move : CustomStringConvertible{
+public struct Move : CustomStringConvertible, Equatable{
     public var description: String {
         "Movement for Player : " + owner.description + " from (" + rowOrigin.description + ", " + columnOrigin.description + ") to (" + rowDestination.description + ", " + columnDestination.description + ")"
     }

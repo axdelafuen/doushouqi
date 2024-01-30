@@ -21,6 +21,6 @@ public class Player {
     }
     
     public func chooseMove(board: Board, rules: Rules) -> Move? {
-        fatalError("This method must be implemented by the child classes.")
+        return nil
     }
 }

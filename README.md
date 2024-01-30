@@ -76,6 +76,7 @@ package "Model" {
 @startuml
 
 package Model {
+
 package GameBoard <<Rectangle>> {
     struct Board {
         <<struct>>
@@ -228,11 +229,21 @@ package GameBoard <<Rectangle>> {
 	ClassicRules ..> GameError
 	VerySimpleRules ..> GameError
     }
+
+package Game <<Rectangle>> {
+    struct Game {
+        +init(rules:Rules, player1:Player, player2:Player)
+        +start()
+    }
+}
+Game.Game ..> "1" Rules.Rules : rules
+Game.Game ..> "2" Player : players
+Game.Game ..> "1" Board : board
 }
 
 Cell --> "1" CellType : cellType
 Cell --> "1" Owner : initialOwner
-Board -->  Cell : grid [[]]
+Board --> "1" Cell : grid [[]]
 
 Board ..> BoardResult
 BoardResult ..> BoardFailingReason

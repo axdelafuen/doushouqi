@@ -238,10 +238,10 @@ public func dumb_AI_Game() async throws {
             gameOver = rules.isGameOver(board: board, row: move.rowDestination, column: move.columnDestination)
         }
         counter += 1
-        try await Task.sleep(nanoseconds: UInt64(0.2 * Double(NSEC_PER_SEC)))
+        try await Task.sleep(nanoseconds: UInt64(0.2*(pow(10.0, 9))))
     }
     print(gameOver.1)
     print(board)
 }
 
-//try await dumb_AI_Game()
+try await dumb_AI_Game()

@@ -15,7 +15,6 @@ steps:
       - cd ../CommandLineExt/
       - swift build
       - cd ../CommandLineTest/
-      - sudo apt-get install llvm
       - swift build
 
   - name: tests
@@ -23,5 +22,6 @@ steps:
     commands:
       - cd ./Sources/Model/
       - swift test
+      - apt-get install llvm
       - ./coverage.sh
     depends_on: [build]

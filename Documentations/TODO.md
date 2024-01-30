@@ -38,10 +38,12 @@
 
 # TP 4
 
-- [ ] Update class diagram
+- [x] Update class diagram
 
 - [x] There is some bugs in the game function (some pieces are not moved corectly) -> cf. `main.swift`
 
-- [ ] Write `HumanePlayer` methods
+- [x] Write `HumanePlayer` methods
+
+- [ ] Try `HumanPlayer` in console, with dependance injection of methods
 
 - [ ] Write test for `Model` (up to 90%)

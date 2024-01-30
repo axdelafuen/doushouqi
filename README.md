@@ -236,9 +236,9 @@ package GameManagement <<Rectangle>> {
         +start()
     }
 }
-Game ..> "1" Rules : rules
-Game ..> "2" Player : players
-Game ..> "1" Board : board
+Game --> "1" Rules : rules
+Game --> "2" Player : players
+Game --> "1" Board : board
 }
 
 Cell --> "1" CellType : cellType

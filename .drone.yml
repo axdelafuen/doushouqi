@@ -21,6 +21,6 @@ steps:
     image: swift:latest
     commands:
       - cd ./Sources/Model/
-      - swift test
+      - swift test --enable-code-coverage
       - ./coverage.sh
     depends_on: [build]

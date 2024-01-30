@@ -8,7 +8,7 @@
 import Foundation
 
 public class RandomPlayer: Player {
-    override public func chooseMove(board: Board, rules: Rules) -> Move{
+    override public func chooseMove(board: Board, rules: Rules) -> Move?{
         // Get all moves
         let moves:[Move] = rules.getMoves(board: board, owner: self.id)
         

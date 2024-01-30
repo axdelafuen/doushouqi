@@ -20,7 +20,7 @@ public class Player {
         self.id = id
     }
     
-    public func chooseMove(board: Board, rules: Rules) -> Move {
+    public func chooseMove(board: Board, rules: Rules) -> Move? {
         fatalError("This method must be implemented by the child classes.")
     }
 }

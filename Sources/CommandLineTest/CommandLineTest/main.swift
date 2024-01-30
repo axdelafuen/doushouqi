@@ -188,7 +188,7 @@ public func debugTp4() {
     let sa:Player? = RandomPlayer(name: "Supidité Artificielle", id: Owner.player1)
     
     if let sa {
-        print(sa.chooseMove(board: board, rules: VerySimpleRules()))
+        print(sa.chooseMove(board: board, rules: VerySimpleRules())!)
     }
 
     //let player:Player? = HumanPlayer(name: "GROSLARDON", id: Owner.player2, inputMethod: )
@@ -207,28 +207,23 @@ public func dumb_AI_Game() async throws {
     let dumb1 = RandomPlayer(name: "STUPID 1", id: Owner.player1)!
     let dumb2 = RandomPlayer(name: "STUPID 2", id: Owner.player2)!
     
+    var currentMove:Move?
+    
     var counter = 1
     
     var gameOver:(Bool, Result) = (false, Result.notFinished)
     while(!gameOver.0) {
         print("---------- Tour : ", counter, "(", rules.getNextPlayer(),")" , " ----------")
         print(board)
+        let oldBoard = board
         if rules.getNextPlayer() == dumb1.id {
-            let move = dumb1.chooseMove(board: board, rules: rules)
-            let oldBoard = board
-            
-            _ = board.removePiece(atRow: move.rowDestination, andColumn: move.columnDestination)
-            _ = board.insert(piece: board.grid[move.rowOrigin][move.columnOrigin].piece!, atRow: move.rowDestination, andColumn: move.columnDestination)
-            _ = board.removePiece(atRow: move.rowOrigin, andColumn: move.columnOrigin)
-            
-            rules.playedMove(move: move, oldBoard: oldBoard, newBoard: board)
-
-            gameOver = rules.isGameOver(board: board, row: move.rowDestination, column: move.columnDestination)
+            currentMove = dumb1.chooseMove(board: board, rules: rules)
         }
         else {
-            let move = dumb2.chooseMove(board: board, rules: rules)
-            let oldBoard = board
-            
+            currentMove = dumb2.chooseMove(board: board, rules: rules)
+        }
+        // ya t il un move ?
+        if let move = currentMove {
             _ = board.removePiece(atRow: move.rowDestination, andColumn: move.columnDestination)
             _ = board.insert(piece: board.grid[move.rowOrigin][move.columnOrigin].piece!, atRow: move.rowDestination, andColumn: move.columnDestination)
             _ = board.removePiece(atRow: move.rowOrigin, andColumn: move.columnOrigin)
@@ -236,8 +231,9 @@ public func dumb_AI_Game() async throws {
             rules.playedMove(move: move, oldBoard: oldBoard, newBoard: board)
             
             gameOver = rules.isGameOver(board: board, row: move.rowDestination, column: move.columnDestination)
+            
+            counter += 1
         }
-        counter += 1
         try await Task.sleep(nanoseconds: UInt64(0.2*(pow(10.0, 9))))
     }
     print(gameOver.1)

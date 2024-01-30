@@ -22,4 +22,5 @@ steps:
     commands:
       - cd ./Sources/Model/
       - swift test
+      - ./coverage.sh
     depends_on: [build]

@@ -15,6 +15,7 @@ steps:
       - cd ../CommandLineExt/
       - swift build
       - cd ../CommandLineTest/
+      - sudo apt-get install llvm
       - swift build
 
   - name: tests

@@ -240,4 +240,65 @@ public func dumb_AI_Game() async throws {
     print(board)
 }
 
-try await dumb_AI_Game()
+//try await dumb_AI_Game()
+
+func userInputMethod(player: HumanPlayer, rules:Rules, board:Board) -> Move? {
+    print("Joueur \(player.name), veuillez entrer votre mouvement parmis la liste :")
+    
+    let moves:[Move] = rules.getMoves(board: board, owner: player.id)
+    
+    for index in 0..<moves.count {
+        print(index,"- ", moves[index])
+    }
+
+    
+    if let userInput = readLine() {
+        let value = Int(userInput) ?? -1
+        if value == -1 {
+            return nil
+        }
+        return moves[value]
+    }
+    return nil
+}
+
+public func testHumanVsRandom() async throws {
+    var board = VerySimpleRules.createBoard()
+    var rules = VerySimpleRules()
+    let player = HumanPlayer(name: "PLAYER", id: Owner.player1, inputMethod: userInputMethod)!
+    let dumb = RandomPlayer(name: "STUPID", id: Owner.player2)!
+    
+    var currentMove:Move?
+    
+    var counter = 1
+    
+    var gameOver:(Bool, Result) = (false, Result.notFinished)
+    while(!gameOver.0) {
+        print("---------- Tour : ", counter, "(", rules.getNextPlayer(),")" , " ----------")
+        print(board)
+        let oldBoard = board
+        if rules.getNextPlayer() == dumb.id {
+            currentMove = dumb.chooseMove(board: board, rules: rules)
+        }
+        else {
+            currentMove = player.chooseMove(board: board, rules: rules)
+        }
+        // ya t il un move ?
+        if let move = currentMove {
+            _ = board.removePiece(atRow: move.rowDestination, andColumn: move.columnDestination)
+            _ = board.insert(piece: board.grid[move.rowOrigin][move.columnOrigin].piece!, atRow: move.rowDestination, andColumn: move.columnDestination)
+            _ = board.removePiece(atRow: move.rowOrigin, andColumn: move.columnOrigin)
+            
+            rules.playedMove(move: move, oldBoard: oldBoard, newBoard: board)
+            
+            gameOver = rules.isGameOver(board: board, row: move.rowDestination, column: move.columnDestination)
+            
+            counter += 1
+        }
+        try await Task.sleep(nanoseconds: UInt64(1*(pow(10.0, 9))))
+    }
+    print(gameOver.1)
+    print(board)
+}
+
+try await testHumanVsRandom()

@@ -44,6 +44,10 @@
 
 - [x] Write `HumanePlayer` methods
 
-- [ ] Try `HumanPlayer` in console, with dependance injection of methods
+- [x] Try `HumanPlayer` in console, with dependance injection of methods
 
-- [ ] Write test for `Model` (up to 90%)
+- [x] Write test for `Model` (up to 90%)
+
+- [ ] Sonar ?
+
+- [ ] IA ?

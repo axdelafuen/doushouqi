@@ -12,10 +12,10 @@ public class RandomPlayer: Player {
         // Get all moves
         let moves:[Move] = rules.getMoves(board: board, owner: self.id)
         
-        // Choose a random number in moves tab
-        let chosenMoveIndex = Int(UInt32.random(in: 0..<UInt32(moves.count)))
+        // Check if there is at least one move
+        if moves.count == 0 { return nil; }
         
-        // Return the move
-        return moves[chosenMoveIndex]
+        // Choose a random number in moves tab, and return the selected move
+        return moves[Int(UInt32.random(in: 0..<UInt32(moves.count)))]
     }
 }

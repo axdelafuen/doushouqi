@@ -242,6 +242,47 @@ public func dumb_AI_Game() async throws {
 
 //try await dumb_AI_Game()
 
+public func simple_AI_Game() async throws {
+    var board = VerySimpleRules.createBoard()
+    var rules = VerySimpleRules()
+    let dumb1 = SimpleAIPlayer(name: "STUPID 1", id: Owner.player1)!
+    let dumb2 = RandomPlayer(name: "STUPID 2", id: Owner.player2)!
+    
+    var currentMove:Move?
+    
+    var counter = 1
+    
+    var gameOver:(Bool, Result) = (false, Result.notFinished)
+    while(!gameOver.0) {
+        print("---------- Tour : ", counter, "(", rules.getNextPlayer(),")" , " ----------")
+        print(board)
+        let oldBoard = board
+        if rules.getNextPlayer() == dumb1.id {
+            currentMove = dumb1.chooseMove(board: board, rules: rules)
+        }
+        else {
+            currentMove = dumb2.chooseMove(board: board, rules: rules)
+        }
+        // ya t il un move ?
+        if let move = currentMove {
+            _ = board.removePiece(atRow: move.rowDestination, andColumn: move.columnDestination)
+            _ = board.insert(piece: board.grid[move.rowOrigin][move.columnOrigin].piece!, atRow: move.rowDestination, andColumn: move.columnDestination)
+            _ = board.removePiece(atRow: move.rowOrigin, andColumn: move.columnOrigin)
+            
+            rules.playedMove(move: move, oldBoard: oldBoard, newBoard: board)
+            
+            gameOver = rules.isGameOver(board: board, row: move.rowDestination, column: move.columnDestination)
+            
+            counter += 1
+        }
+        try await Task.sleep(nanoseconds: UInt64(0.2*(pow(10.0, 9))))
+    }
+    print(gameOver.1)
+    print(board)
+}
+
+try await simple_AI_Game()
+
 func userInputMethod(player: HumanPlayer, rules:Rules, board:Board) -> Move? {
     print("Joueur \(player.name), veuillez entrer votre mouvement parmis la liste :")
     
@@ -301,4 +342,4 @@ public func testHumanVsRandom() async throws {
     print(board)
 }
 
-try await testHumanVsRandom()
+//try await testHumanVsRandom()

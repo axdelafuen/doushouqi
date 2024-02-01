@@ -175,6 +175,9 @@ public struct VerySimpleRules : Rules {
                 }
             }
         }
+        else {
+            return false
+        }
         
         return true
     }

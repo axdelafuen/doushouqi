@@ -44,7 +44,7 @@ final class PlayerTest: XCTestCase {
     }
 
     func testHumanPlayer() throws {
-        func userInputMethod(player: HumanPlayer, rules:Rules, board:Board) -> Move? {
+        func userInputMethod(player: HumanPlayer) -> Move {
             let moves:[Move] = rules.getMoves(board: board, owner: player.id)
             return moves[0]
         }

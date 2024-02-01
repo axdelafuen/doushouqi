@@ -281,9 +281,10 @@ public func simple_AI_Game() async throws {
     print(board)
 }
 
-try await simple_AI_Game()
+//try await simple_AI_Game()
 
-func userInputMethod(player: HumanPlayer, rules:Rules, board:Board) -> Move? {
+/*
+func userInputMethod2(player: HumanPlayer, rules:Rules, board:Board) -> Move? {
     print("Joueur \(player.name), veuillez entrer votre mouvement parmis la liste :")
     
     let moves:[Move] = rules.getMoves(board: board, owner: player.id)
@@ -302,12 +303,57 @@ func userInputMethod(player: HumanPlayer, rules:Rules, board:Board) -> Move? {
     }
     return nil
 }
+*/
+
+func userInputMethod(player: HumanPlayer) -> Move {
+    print("Joueur \(player.name), veuillez entrer votre mouvement :")
+    
+    var rowOrigin:Int = -1; var columnOrigin:Int = -1; var rowDestination:Int = -1; var columnDestination:Int = -1
+    
+    print("Ligne d'origine : ")
+    if let inputRowOrigin = readLine() {
+        let value = Int(inputRowOrigin) ?? -1
+        if value == -1 {
+            fatalError("Only numbers can be input")
+        }
+        rowOrigin = value
+    }
+    
+    print("Colonne d'origine : ")
+    if let inputColumnOrigin = readLine() {
+        let value = Int(inputColumnOrigin) ?? -1
+        if value == -1 {
+            fatalError("Only numbers can be input")
+        }
+        columnOrigin = value
+    }
+    
+    print("Ligne de destination : ")
+    if let inputRowDest = readLine() {
+        let value = Int(inputRowDest) ?? -1
+        if value == -1 {
+            fatalError("Only numbers can be input")
+        }
+        rowDestination = value
+    }
+    
+    print("Colonne de destination : ")
+    if let inputColumnDest = readLine() {
+        let value = Int(inputColumnDest) ?? -1
+        if value == -1 {
+            fatalError("Only numbers can be input")
+        }
+        columnDestination = value
+    }
+    
+    return Move(owner: player.id, rowOrigin: rowOrigin, columnOrigin: columnOrigin, rowDestination: rowDestination, columnDestination: columnDestination)
+}
 
 public func testHumanVsRandom() async throws {
     var board = VerySimpleRules.createBoard()
     var rules = VerySimpleRules()
     let player = HumanPlayer(name: "PLAYER", id: Owner.player1, inputMethod: userInputMethod)!
-    let dumb = RandomPlayer(name: "STUPID", id: Owner.player2)!
+    let dumb = SimpleAIPlayer(name: "STUPID", id: Owner.player2)!
     
     var currentMove:Move?
     
@@ -322,7 +368,8 @@ public func testHumanVsRandom() async throws {
             currentMove = dumb.chooseMove(board: board, rules: rules)
         }
         else {
-            currentMove = player.chooseMove(board: board, rules: rules)
+            //currentMove = player.chooseMove(board: board, rules: rules)
+            currentMove = player.chooseAmongAvalaibleMove(board: board, rules: rules)
         }
         // ya t il un move ?
         if let move = currentMove {
@@ -342,4 +389,4 @@ public func testHumanVsRandom() async throws {
     print(board)
 }
 
-//try await testHumanVsRandom()
+try await testHumanVsRandom()

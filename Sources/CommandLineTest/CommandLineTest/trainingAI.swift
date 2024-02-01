@@ -101,5 +101,5 @@ public func trainingAI(nbGameSample:Int){
             games.append(game)
         }
     }
-    writeGamesToCSV(games: games, filePath: "./test.csv")
+    writeGamesToCSV(games: games, filePath: "./gamesSample.csv")
 }

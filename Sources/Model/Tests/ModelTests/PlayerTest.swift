@@ -30,9 +30,9 @@ final class PlayerTest: XCTestCase {
     }
     
     func testPlayerIsInstanciatedAndTryAMove() throws {
-        let randPlayer:Player? = Player(name: "test", id: Owner.player1)
-        XCTAssertNotNil(randPlayer)
-        XCTAssertNil(randPlayer?.chooseMove(board: board, rules: rules))
+        let player:Player? = Player(name: "test", id: Owner.player1)
+        XCTAssertNotNil(player)
+        XCTAssertNil(player?.chooseMove(board: board, rules: rules))
     }
     
     func testRandomPlayerChooseMove() throws {
@@ -43,4 +43,21 @@ final class PlayerTest: XCTestCase {
         XCTAssertTrue(rules.getMoves(board: board, owner: randPlayer!.id).contains(where: { $0 == move! }))
     }
 
+    func testHumanPlayer() throws {
+        func userInputMethod(player: HumanPlayer) -> Move {
+            let moves:[Move] = rules.getMoves(board: board, owner: player.id)
+            return moves[0]
+        }
+        
+        let player:Player? = HumanPlayer(name: "test", id: Owner.player1, inputMethod: userInputMethod)
+        XCTAssertNotNil(player)
+        XCTAssertNotNil(player?.chooseMove(board: board, rules: rules))
+    }
+    
+    func testSimpleAiPlayer() throws {
+        let player:Player? = SimpleAIPlayer(name: "test", id: Owner.player1)
+        XCTAssertNotNil(player)
+        XCTAssertNotNil(player?.chooseMove(board: board, rules: rules))
+    }
+    
 }

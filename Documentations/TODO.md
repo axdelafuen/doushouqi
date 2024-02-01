@@ -48,6 +48,9 @@
 
 - [x] Write test for `Model` (up to 90%)
 
-- [ ] Sonar ?
+- [ ] Sonar ? => IMPOSSIBLE (Soanr community ne prend pas en compte Swift)
 
-- [ ] IA ?
+- [ ] IA ? => tres simple pour le moment
+
+- `@escaping` devant une injection de dependance, permet de la stocker et de ne pas la détruire a la fin de l'init
+

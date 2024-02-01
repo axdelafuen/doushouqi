@@ -25,6 +25,8 @@ steps:
       - ./coverage.sh
     depends_on: [build]
 
+  # UNAVAILABLE WITH SONARQUBE COMMUNITY :(
+  #
   # - name: analysis
   #   image: hub.codefirst.iut.uca.fr/axel.de_la_fuente/codefirst-dronesonarplugin-swift
   #   settings:

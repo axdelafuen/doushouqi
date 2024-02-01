@@ -306,7 +306,7 @@ func userInputMethod2(player: HumanPlayer, rules:Rules, board:Board) -> Move? {
 */
 
 func userInputMethod(player: HumanPlayer) -> Move {
-    print("Joueur \(player.name), veuillez entrer votre mouvement :")
+    print("\(player.name), veuillez entrer votre mouvement :")
     
     var rowOrigin:Int = -1; var columnOrigin:Int = -1; var rowDestination:Int = -1; var columnDestination:Int = -1
     
@@ -361,7 +361,7 @@ public func testHumanVsRandom() async throws {
     
     var gameOver:(Bool, Result) = (false, Result.notFinished)
     while(!gameOver.0) {
-        print("---------- Tour : ", counter, "(", rules.getNextPlayer(),")" , " ----------")
+        print("---------- Tour :", counter, "(", rules.getNextPlayer().symbol,")" , " ----------")
         print(board)
         let oldBoard = board
         if rules.getNextPlayer() == dumb.id {

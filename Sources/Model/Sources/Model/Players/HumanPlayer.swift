@@ -17,12 +17,6 @@ public class HumanPlayer: Player {
     }
     
     override public func chooseMove(board: Board, rules: Rules) -> Move? {
-        let inputMove:Move = self.input(self)
-        
-        if rules.isMoveValid(board: board, move: inputMove) {
-            return inputMove
-        }
-        
-        return nil
+        return self.input(self)
     }
 }

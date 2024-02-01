@@ -18,4 +18,4 @@ import CommandLineExt
 
 //try await simple_AI_vs_random_Game()
 
-//try await testHumanVsRandom()
+try await testHumanVsRandom()

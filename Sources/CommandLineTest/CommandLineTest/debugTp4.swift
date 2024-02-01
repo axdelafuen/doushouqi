@@ -169,8 +169,11 @@ public func testHumanVsRandom() async throws {
         }
         else {
             // CHOOSE INPUT METHOD (only in console)
-            //currentMove = player.chooseMove(board: board, rules: rules)
-            currentMove = player.chooseAmongAvalaibleMove(board: board, rules: rules)
+            currentMove = player.chooseMove(board: board, rules: rules)
+            if !rules.isMoveValid(board: board, move: currentMove!) {
+                currentMove = nil
+            }
+            //currentMove = player.chooseAmongAvalaibleMove(board: board, rules: rules)
         }
         // ya t il un move ?
         if let move = currentMove {

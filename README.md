@@ -76,15 +76,17 @@ package "Model" {
 @startuml
 
 package Model {
+
+package GameBoard <<Rectangle>> {
     struct Board {
         <<struct>>
         +nbRows : Int
         +nbColumns : Int
         +init?(grid:[ [ Cell ] ])
-        +countPieces(owner:Owner) : Int
-        +countPieces() : (Int, Int)
-        +insert(piece:Piece, row:Int, column:Int) : BoardResult
-        +removePiece(row:Int, column:Int) : BoardResult
+        +countPieces(owner:Owner) -> Int
+        +countPieces() -> (Int, Int)
+        +insert(piece:Piece, row:Int, column:Int) -> BoardResult
+        +removePiece(row:Int, column:Int) -> BoardResult
     }
 
     struct Cell {
@@ -133,19 +135,41 @@ package Model {
     struct Piece {
         +init(owner:Owner, animal:Animal)
     }
+}
 
-    package Rules <<Rectangle>> {
-       interface Rules <<protocol>> {
-	    {static} +createBoard(): Board
+    package Players <<Rectangle>> {
+        class Player {
+	    +id: Owner
+	    +name: String
+	    +init?(name: String, id: Owner)
+	    +chooseMove(board: Board, rules: Rules) -> Move?
+	}
+	
+	class RandomPlayer {
+	    +init?(name: String, id: Owner)
+	}
+	
+	class HumanPlayer {
+	    +init?(name: String, id : Owner, inputMethod: (HumanPlayer) -> Move?)
+	    +input:(HumanPlayer) -> Move?
+	}
+	
+	RandomPlayer --|> Player
+	HumanPlayer --|> Player
+    }
+
+    package GameRules <<Rectangle>> {
+       protocol Rules {
+	    {static} +createBoard() -> Board
 	    {static} +checkBoard(board: Board)
-	    +getNextPlayer() : Owner
-	    +getMoves(board: Board, owner: Owner): Array<Move>
-	    +getMoves(board: Board, owner: Owner, row: Int, column: Int): Array<Move>
-	    +isMoveValid(board: Board, rowOrigin: Int, columnOrigin: Int, rowDest: Int, columnDest: Int): Bool
-	    +isMoveValid(board: Board, move: Move): Bool
-	    +isGameOver(board: Board, row: Int, column: Int): (Bool, Result)  
+	    +getNextPlayer() -> Owner
+	    +getMoves(board: Board, owner: Owner) -> Array<Move>
+	    +getMoves(board: Board, owner: Owner, row: Int, column: Int) -> Array<Move>
+	    +isMoveValid(board: Board, rowOrigin: Int, columnOrigin: Int, rowDest: Int, columnDest: Int) -> Bool
+	    +isMoveValid(board: Board, move: Move) -> Bool
+	    +isGameOver(board: Board, row: Int, column: Int) -> (Bool, Result)  
 	    +playedMove(move: Move, oldBoard: Board, newBoard: Board)
-	    +occurences : [Board: Int]
+	    +occurences: [Board: Int]
 	    +historic: [Move]
 	}
 
@@ -205,11 +229,21 @@ package Model {
 	ClassicRules ..> GameError
 	VerySimpleRules ..> GameError
     }
+
+package GameManagement <<Rectangle>> {
+    struct Game {
+        +init(rules:Rules, player1:Player, player2:Player)
+        +start()
+    }
+}
+Game --> "1" Rules : rules
+Game --> "2" Player : players
+Game --> "1" Board : board
 }
 
 Cell --> "1" CellType : cellType
 Cell --> "1" Owner : initialOwner
-Board -->  Cell : grid [[]]
+Board --> "1" Cell : grid [[]]
 
 Board ..> BoardResult
 BoardResult ..> BoardFailingReason
@@ -254,3 +288,4 @@ Animal <|-- AnimalCmdExt
 Thanks to my professor for his guidance and feedback throughout the development of this project.
 
 - Marc CHEVALDONNE
+

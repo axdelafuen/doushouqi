@@ -35,3 +35,22 @@
 - [x] `Move` class should inherit from `CustomStringConvertible`, and have the `description` attributes
 
 - [x] Check the dest cell, if it s possible to eat it (`isMoveValid()`)
+
+# TP 4
+
+- [x] Update class diagram
+
+- [x] There is some bugs in the game function (some pieces are not moved corectly) -> cf. `main.swift`
+
+- [x] Write `HumanePlayer` methods
+
+- [x] Try `HumanPlayer` in console, with dependance injection of methods
+
+- [x] Write test for `Model` (up to 90%)
+
+- [ ] Sonar ? => IMPOSSIBLE (Soanr community ne prend pas en compte Swift)
+
+- [ ] IA ? => tres simple pour le moment
+
+- `@escaping` devant une injection de dependance, permet de la stocker et de ne pas la détruire a la fin de l'init
+

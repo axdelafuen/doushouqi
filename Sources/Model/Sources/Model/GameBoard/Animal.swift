@@ -34,6 +34,8 @@ public enum Animal : Equatable, Comparable{
             switch (lhs, rhs) {
             case (.elephant, .rat):
                 return true
+            case (.rat, .elephant):
+                return false
             default:
                 return lhs.weight < rhs.weight
             }
@@ -43,6 +45,8 @@ public enum Animal : Equatable, Comparable{
             switch (lhs, rhs) {
             case (.elephant, .rat):
                 return false
+            case (.rat, .elephant):
+                return true
             default:
                 return lhs.weight > rhs.weight
             }

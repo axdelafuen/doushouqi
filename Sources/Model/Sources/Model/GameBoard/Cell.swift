@@ -22,10 +22,7 @@ public struct Cell : CustomStringConvertible, Equatable, Hashable {
     }
     
     // return string of the piece, its type and its owner
-    public var description : String {
-        // en une ligne ?? (marche pas)
-        // return "\(piece ?? "ø") on \(cellType), \(initialOwner)"
-        
+    public var description : String {        
         if let p = piece {
             return "\(p) on \(cellType), \(initialOwner)"
         }

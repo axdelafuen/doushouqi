@@ -24,3 +24,12 @@ steps:
       - swift test --enable-code-coverage
       - ./coverage.sh
     depends_on: [build]
+
+  # - name: analysis
+  #   image: hub.codefirst.iut.uca.fr/axel.de_la_fuente/codefirst-dronesonarplugin-swift
+  #   settings:
+  #     sonar_token:
+  #       from_secret: SECRET_SONAR_LOGIN
+  #   commands:
+  #     - sonar-scanner -Dsonar.projectKey=DouShouQi -Dsonar.sources=. -Dsonar.host.url=https://codefirst.iut.uca.fr/sonar -Dsonar.login=$${PLUGIN_SONAR_TOKEN}
+  #   depends_on: [tests]

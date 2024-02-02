@@ -32,4 +32,4 @@ import CommandLineExt
  * CREATE SAMPLE OF GAME INTO CSV (need to use it in console, or no csv created)
  */
 
-trainingAI(nbGameSample: 10)
+trainingAI(nbGameSample: 1000)

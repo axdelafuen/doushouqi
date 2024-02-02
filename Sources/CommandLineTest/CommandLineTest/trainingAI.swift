@@ -68,22 +68,23 @@ public func gamesGenerator() -> GameTraining? {
 }
 
 public func gameToCSV(game: GameTraining, gameNb: Int) -> String {
-    var csvString = ""
+    var moveString = ""
     var count = 1
     for move in game.moves {
-        csvString += "\(move.owner),\(gameNb),\(count),\(move.rowOrigin),\(move.columnOrigin),\(move.rowDestination),\(move.columnDestination),\(game.winner)"+"\n"
+        moveString += "\(move.rowOrigin)\(move.columnOrigin) \(move.rowDestination)\(move.columnDestination) "
         count += 1
     }
 
-    return csvString
+    return "\(gameNb),\(count),\(moveString),\(game.winner)"
 }
 
 func writeGamesToCSV(games: [GameTraining], filePath: String) {
     var csvString:String = ""
-    var countGame:Int = 0
+    var countGame:Int = 1
     
     for game in games {
-        csvString += "player,gameNb,roundNb,rowOrigin,columnOrigin,rowDestination,columnDestination,winner\n"
+        //csvString += "player,gameNb,roundNb,rowOrigin,columnOrigin,rowDestination,columnDestination,winner\n"
+        csvString += "gameNb,roundNb,moves,winner\n"
         csvString += gameToCSV(game: game, gameNb: countGame)
         csvString += "\n"
         countGame += 1

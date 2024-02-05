@@ -13,19 +13,46 @@ public struct Game{
     private let player1:Player
     private let player2:Player
     
+    // game is starting event
     private var gameStartCallback:[(Board)->Void] = []
     public mutating func addGameStartListener(listener:@escaping (Board) -> Void){
         gameStartCallback.append(listener)
     }
-    
-    private var nextPlayerCallback:[(Player, Board)->Void] = []
-    public mutating func addNextPlayerListener(listener:@escaping (Player, Board) -> Void) {
+
+    // next turn, current plyer changed event
+    private var nextPlayerCallback:[(Player)->Void] = []
+    public mutating func addNextPlayerListener(listener:@escaping (Player) -> Void) {
         nextPlayerCallback.append(listener)
     }
     
+    // game state event
     private var gameStateCallback:[(Result)->Void] = []
     public mutating func addGameStateListener(listener:@escaping (Result) -> Void) {
         gameStateCallback.append(listener)
+    }
+    
+    // move chosen event
+    private var moveChosedCallback:[(Move)->Void] = []
+    public mutating func addMoveChosedListener(listener:@escaping (Move) -> Void){
+        moveChosedCallback.append(listener)
+    }
+    
+    // move done event
+    private var moveDoneCallback:[(Move)->Void] = []
+    public mutating func addMoveDoneListener(listener:@escaping (Move)->Void){
+        moveDoneCallback.append(listener)
+    }
+    
+    // invalid move event
+    private var invalidMoveCallback:[(Move)->Void] = []
+    public mutating func addInvalidMoveListener(listener:@escaping (Move)->Void){
+        invalidMoveCallback.append(listener)
+    }
+    
+    // board changed event
+    private var boardChangedCallback:[(Board)->Void] = []
+    public mutating func addBoardChangedListener(listener:@escaping (Board)->Void){
+        boardChangedCallback.append(listener)
     }
     
     public init(rules:Rules, player1:Player, player2:Player){
@@ -41,27 +68,28 @@ public struct Game{
         }
         
         var currentMove:Move?
+        var currentPlayer:Player
         var gameOver:(Bool, Result) = (false, Result.notFinished)
         
         while(!gameOver.0) {
             let oldBoard = board
             
-            if rules.getNextPlayer() == player1.id {
-                for callback in nextPlayerCallback {
-                    callback(player1, board)
-                }
-                currentMove = player1.chooseMove(board: board, rules: rules)
-            }
-            else {
-                for callback in nextPlayerCallback {
-                    callback(player2, board)
-                }
-                currentMove = player2.chooseMove(board: board, rules: rules)
+            currentPlayer = rules.getNextPlayer() == player1.id ? player1 : player2
+            
+            for callback in nextPlayerCallback {
+                callback(currentPlayer)
             }
             
-            // MOVE CHOSEN EVENT
+            currentMove = currentPlayer.chooseMove(board: board, rules: rules)
+            
+            for callback in moveChosedCallback {
+                callback(currentMove!)
+            }
             
             if !rules.isMoveValid(board: board, move: currentMove!) {
+                for callback in invalidMoveCallback {
+                    callback(currentMove!)
+                }
                 currentMove = nil
             }
             
@@ -72,14 +100,15 @@ public struct Game{
                 _ = board.removePiece(atRow: move.rowOrigin, andColumn: move.columnOrigin)
                 
                 rules.playedMove(move: move, oldBoard: oldBoard, newBoard: board)
-                // BOARD CHANGED EVENT
+                
+                for callback in moveDoneCallback {
+                    callback(move)
+                }
+                for callback in boardChangedCallback {
+                    callback(board)
+                }
                 
                 gameOver = rules.isGameOver(board: board, row: move.rowDestination, column: move.columnDestination)
-                
-                // MOVE DONE EVENT
-            }
-            else {
-                // INVALID MOVE EVENT
             }
             
             for callback in gameStateCallback {

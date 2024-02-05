@@ -15,6 +15,7 @@
 		EC6887AE2B6BADFE00855DAF /* debugTp3.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC6887AD2B6BADFE00855DAF /* debugTp3.swift */; };
 		EC6887B02B6BAE2100855DAF /* debugTp4.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC6887AF2B6BAE2100855DAF /* debugTp4.swift */; };
 		EC6887B22B6BF9DF00855DAF /* trainingAI.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC6887B12B6BF9DF00855DAF /* trainingAI.swift */; };
+		EC6887B42B70F0FE00855DAF /* debugTp5.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC6887B32B70F0FE00855DAF /* debugTp5.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -37,6 +38,7 @@
 		EC6887AD2B6BADFE00855DAF /* debugTp3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = debugTp3.swift; sourceTree = "<group>"; };
 		EC6887AF2B6BAE2100855DAF /* debugTp4.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = debugTp4.swift; sourceTree = "<group>"; };
 		EC6887B12B6BF9DF00855DAF /* trainingAI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = trainingAI.swift; sourceTree = "<group>"; };
+		EC6887B32B70F0FE00855DAF /* debugTp5.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = debugTp5.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +80,7 @@
 				EC6887AD2B6BADFE00855DAF /* debugTp3.swift */,
 				EC6887AF2B6BAE2100855DAF /* debugTp4.swift */,
 				EC6887B12B6BF9DF00855DAF /* trainingAI.swift */,
+				EC6887B32B70F0FE00855DAF /* debugTp5.swift */,
 			);
 			path = CommandLineTest;
 			sourceTree = "<group>";
@@ -106,7 +109,7 @@
 			);
 			name = CommandLineTest;
 			packageProductDependencies = (
-				EC20A87B2B5060F4008F2A0B /* CommandLineExt */,
+		EC20A87B2B5060F4008F2A0B /* CommandLineExt */,
 				EC311BA72B52C2DF0069CFD4 /* Model */,
 			);
 			productName = CommandLineTest;
@@ -152,6 +155,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EC12744A2B4E8EC90089460F /* main.swift in Sources */,
+				EC6887B42B70F0FE00855DAF /* debugTp5.swift in Sources */,
 				EC6887B02B6BAE2100855DAF /* debugTp4.swift in Sources */,
 				EC6887AC2B6BADCF00855DAF /* debugTp2.swift in Sources */,
 				EC6887AA2B6BAD8900855DAF /* debugTp1.swift in Sources */,

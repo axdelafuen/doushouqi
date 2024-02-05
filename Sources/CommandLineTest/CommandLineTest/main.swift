@@ -17,6 +17,7 @@ import CommandLineExt
 //debugTp2()
 //debugTp3()
 //debugTp4()
+//debugTp5()
 
 /*
  * START SOME DIFERENT KIND OF GAMES
@@ -32,4 +33,4 @@ import CommandLineExt
  * CREATE SAMPLE OF GAME INTO CSV (need to use it in console, or no csv created)
  */
 
-trainingAI(nbGameSample: 1000)
+//trainingAI(nbGameSample: 1000)

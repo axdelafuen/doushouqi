@@ -38,8 +38,8 @@ public struct Game{
     }
     
     // move done event
-    private var moveDoneCallback:[(Move)->Void] = []
-    public mutating func addMoveDoneListener(listener:@escaping (Move)->Void){
+    private var moveDoneCallback:[(Move, Rules)->Void] = []
+    public mutating func addMoveDoneListener(listener:@escaping (Move, Rules)->Void){
         moveDoneCallback.append(listener)
     }
     
@@ -102,7 +102,7 @@ public struct Game{
                 rules.playedMove(move: move, oldBoard: oldBoard, newBoard: board)
                 
                 for callback in moveDoneCallback {
-                    callback(move)
+                    callback(move, rules)
                 }
                 for callback in boardChangedCallback {
                     callback(board)

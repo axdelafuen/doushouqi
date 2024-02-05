@@ -34,3 +34,5 @@ import CommandLineExt
  */
 
 //trainingAI(nbGameSample: 1000)
+
+AiPlayerTest()

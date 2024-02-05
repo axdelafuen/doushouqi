@@ -137,3 +137,7 @@ public func trainingAI(nbGameSample:Int){
     }
     writeGamesToCSV(games: games, filePath: "./gamesSample.csv")
 }
+
+public func AiPlayerTest(){
+    AiPlayer.trainingAI(nbGameSample: 5)
+}

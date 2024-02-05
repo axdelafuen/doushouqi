@@ -14,14 +14,41 @@ public struct GameTraining{
     let dumb2:Player
     let moves:[Move]
     let winner:Owner
+    let rules:Rules
     
-    init(dumb1: Player, dumb2: Player, moves: [Move], winner: Owner) {
+    init(dumb1: Player, dumb2: Player, moves: [Move], winner: Owner, rules:Rules) {
         self.dumb1 = dumb1
         self.dumb2 = dumb2
         self.moves = moves
         self.winner = winner
+        self.rules = rules
     }
 }
+
+public extension Animal {
+    var notation: String {
+        switch self {
+        case .rat:
+            return "S"
+        case .cat:
+            return "M"
+        case .dog:
+            return "C"
+        case .wolf:
+            return "W"
+        case .leopard:
+            return "P"
+        case .tiger:
+            return "T"
+        case .lion:
+            return "L"
+        case .elephant:
+            return "E"
+        }
+    }
+}
+
+let rowNotation:[Character] = ["A","B","C","D","E","F"]
 
 public func gamesGenerator() -> GameTraining? {
     var board = VerySimpleRules.createBoard()
@@ -59,9 +86,9 @@ public func gamesGenerator() -> GameTraining? {
     
     switch gameOver.1{
     case .winner(owner: .player1, winningReason: _):
-        return GameTraining(dumb1: dumb1, dumb2: dumb2, moves: rules.historic, winner: Owner.player1)
+        return GameTraining(dumb1: dumb1, dumb2: dumb2, moves: rules.historic, winner: Owner.player1, rules: rules)
     case .winner(owner: .player2, winningReason: _):
-        return GameTraining(dumb1: dumb1, dumb2: dumb2, moves: rules.historic, winner: Owner.player2)
+        return GameTraining(dumb1: dumb1, dumb2: dumb2, moves: rules.historic, winner: Owner.player2, rules: rules)
     default:
         return nil
     }
@@ -70,8 +97,11 @@ public func gamesGenerator() -> GameTraining? {
 public func gameToCSV(game: GameTraining, gameNb: Int) -> String {
     var moveString = ""
     var count = 1
+    // HANDLE THE EATING POSSIBILITY
+    
+    // ADD THE PIECE THAT IS MOVING
     for move in game.moves {
-        moveString += "\(move.rowOrigin)\(move.columnOrigin) \(move.rowDestination)\(move.columnDestination) "
+        moveString += "\(rowNotation[move.rowDestination])\(move.columnDestination+1) "
         count += 1
     }
 
@@ -79,12 +109,11 @@ public func gameToCSV(game: GameTraining, gameNb: Int) -> String {
 }
 
 func writeGamesToCSV(games: [GameTraining], filePath: String) {
-    var csvString:String = ""
+    var csvString:String = "gameNb,roundNb,moves,winner\n"
     var countGame:Int = 1
     
     for game in games {
         //csvString += "player,gameNb,roundNb,rowOrigin,columnOrigin,rowDestination,columnDestination,winner\n"
-        csvString += "gameNb,roundNb,moves,winner\n"
         csvString += gameToCSV(game: game, gameNb: countGame)
         csvString += "\n"
         countGame += 1

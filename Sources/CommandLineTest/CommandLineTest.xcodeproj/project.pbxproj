@@ -10,6 +10,8 @@
 		EC12744A2B4E8EC90089460F /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1274492B4E8EC90089460F /* main.swift */; };
 		EC20A87C2B5060F4008F2A0B /* CommandLineExt in Frameworks */ = {isa = PBXBuildFile; productRef = EC20A87B2B5060F4008F2A0B /* CommandLineExt */; };
 		EC311BA82B52C2DF0069CFD4 /* Model in Frameworks */ = {isa = PBXBuildFile; productRef = EC311BA72B52C2DF0069CFD4 /* Model */; };
+		EC5D67012B72439F00FC1F24 /* TestAi.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC5D67002B72439F00FC1F24 /* TestAi.swift */; };
+		EC5D67032B7243C900FC1F24 /* AiPlayerLib in Frameworks */ = {isa = PBXBuildFile; productRef = EC5D67022B7243C900FC1F24 /* AiPlayerLib */; };
 		EC6887AA2B6BAD8900855DAF /* debugTp1.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC6887A92B6BAD8900855DAF /* debugTp1.swift */; };
 		EC6887AC2B6BADCF00855DAF /* debugTp2.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC6887AB2B6BADCF00855DAF /* debugTp2.swift */; };
 		EC6887AE2B6BADFE00855DAF /* debugTp3.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC6887AD2B6BADFE00855DAF /* debugTp3.swift */; };
@@ -32,6 +34,7 @@
 /* Begin PBXFileReference section */
 		EC1274462B4E8EC90089460F /* CommandLineTest */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = CommandLineTest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC1274492B4E8EC90089460F /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		EC5D67002B72439F00FC1F24 /* TestAi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestAi.swift; sourceTree = "<group>"; };
 		EC6887A92B6BAD8900855DAF /* debugTp1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = debugTp1.swift; sourceTree = "<group>"; };
 		EC6887AB2B6BADCF00855DAF /* debugTp2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = debugTp2.swift; sourceTree = "<group>"; };
 		EC6887AD2B6BADFE00855DAF /* debugTp3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = debugTp3.swift; sourceTree = "<group>"; };
@@ -44,6 +47,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EC5D67032B7243C900FC1F24 /* AiPlayerLib in Frameworks */,
 				EC311BA82B52C2DF0069CFD4 /* Model in Frameworks */,
 				EC20A87C2B5060F4008F2A0B /* CommandLineExt in Frameworks */,
 			);
@@ -78,6 +82,7 @@
 				EC6887AD2B6BADFE00855DAF /* debugTp3.swift */,
 				EC6887AF2B6BAE2100855DAF /* debugTp4.swift */,
 				EC6887B32B70F0FE00855DAF /* debugTp5.swift */,
+				EC5D67002B72439F00FC1F24 /* TestAi.swift */,
 			);
 			path = CommandLineTest;
 			sourceTree = "<group>";
@@ -108,6 +113,7 @@
 			packageProductDependencies = (
 				EC20A87B2B5060F4008F2A0B /* CommandLineExt */,
 				EC311BA72B52C2DF0069CFD4 /* Model */,
+				EC5D67022B7243C900FC1F24 /* AiPlayerLib */,
 			);
 			productName = CommandLineTest;
 			productReference = EC1274462B4E8EC90089460F /* CommandLineTest */;
@@ -154,6 +160,7 @@
 				EC12744A2B4E8EC90089460F /* main.swift in Sources */,
 				EC6887B42B70F0FE00855DAF /* debugTp5.swift in Sources */,
 				EC6887B02B6BAE2100855DAF /* debugTp4.swift in Sources */,
+				EC5D67012B72439F00FC1F24 /* TestAi.swift in Sources */,
 				EC6887AC2B6BADCF00855DAF /* debugTp2.swift in Sources */,
 				EC6887AA2B6BAD8900855DAF /* debugTp1.swift in Sources */,
 				EC6887AE2B6BADFE00855DAF /* debugTp3.swift in Sources */,
@@ -330,6 +337,10 @@
 		EC311BA72B52C2DF0069CFD4 /* Model */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Model;
+		};
+		EC5D67022B7243C900FC1F24 /* AiPlayerLib */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = AiPlayerLib;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

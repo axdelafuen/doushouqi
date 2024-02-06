@@ -7,7 +7,7 @@
 
 import Foundation
 
-public class Player {
+open class Player {
     public let id:Owner
     
     public let name:String

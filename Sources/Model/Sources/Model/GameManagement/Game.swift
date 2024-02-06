@@ -55,6 +55,12 @@ public struct Game{
         boardChangedCallback.append(listener)
     }
     
+    // piece removed (eated) event
+    private var pieceRemovedCallback:[(Piece, Piece)->Void] = []
+    public mutating func addPieceRemovedListener(listener:@escaping (_ insertedPiece:Piece, _ removedPiece:Piece)->Void){
+        pieceRemovedCallback.append(listener)
+    }
+    
     public init(rules:Rules, player1:Player, player2:Player){
         self.rules = rules
         self.player1 = player1
@@ -95,9 +101,15 @@ public struct Game{
             
             if let move = currentMove {
                 // HANDLE RETURN VALUE OF THE BOARD
-                _ = board.removePiece(atRow: move.rowDestination, andColumn: move.columnDestination)
+                let firstRemoveResult:BoardResult = board.removePiece(atRow: move.rowDestination, andColumn: move.columnDestination)
                 _ = board.insert(piece: board.grid[move.rowOrigin][move.columnOrigin].piece!, atRow: move.rowDestination, andColumn: move.columnDestination)
                 _ = board.removePiece(atRow: move.rowOrigin, andColumn: move.columnOrigin)
+                
+                if firstRemoveResult == BoardResult.ok {
+                    for callback in pieceRemovedCallback{
+                        callback(oldBoard.grid[move.rowOrigin][move.columnOrigin].piece!, oldBoard.grid[move.rowDestination][move.columnDestination].piece!)
+                    }
+                }
                 
                 rules.playedMove(move: move, oldBoard: oldBoard, newBoard: board)
                 

@@ -39,6 +39,11 @@ public func debugTp5(){
         }
     }
     
+    func onPieceRemoved(inserted:Piece, removed:Piece){
+        print("REMOVED :",removed.animal.symbol)
+        print("INSERTED :",inserted.animal.symbol)
+    }
+    
     // HUMAN INPUT METHOD
     func userInputMethod(player: HumanPlayer) -> Move {
         print("\(player.name), veuillez entrer votre mouvement :")
@@ -74,8 +79,8 @@ public func debugTp5(){
     
     // GAME CREATION
     let rules:Rules = VerySimpleRules()
-    //let player1:Player? = SimpleAIPlayer(name:"DUMB", id:Owner.player1)
-    let player1:Player? = HumanPlayer(name: "MOI", id: Owner.player1, inputMethod: userInputMethod)
+    let player1:Player? = SimpleAIPlayer(name:"DUMB", id:Owner.player1)
+    //let player1:Player? = HumanPlayer(name: "MOI", id: Owner.player1, inputMethod: userInputMethod)
     let player2:Player? = RandomPlayer(name:"RANDOM", id:Owner.player2)
     
     var game:Game = Game(rules: rules, player1: player1!, player2: player2!)
@@ -84,5 +89,6 @@ public func debugTp5(){
     game.addGameStateListener(listener: onGameStateChanged)
     game.addBoardChangedListener(listener: onBoardChanged)
     game.addNextPlayerListener(listener: onNextPlayerChanged)
+    //game.addPieceRemovedListener(listener: onPieceRemoved)
     game.start()
 }

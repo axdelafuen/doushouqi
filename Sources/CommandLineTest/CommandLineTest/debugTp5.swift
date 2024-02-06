@@ -39,8 +39,11 @@ public func debugTp5(){
         }
     }
     
-    func onPieceRemoved(inserted:Piece, removed:Piece){
+    func onPieceRemoved(removed:Piece){
         print("REMOVED :",removed.animal.symbol)
+    }
+    
+    func onPieceInserted(inserted:Piece){
         print("INSERTED :",inserted.animal.symbol)
     }
     
@@ -90,5 +93,6 @@ public func debugTp5(){
     game.addBoardChangedListener(listener: onBoardChanged)
     game.addNextPlayerListener(listener: onNextPlayerChanged)
     //game.addPieceRemovedListener(listener: onPieceRemoved)
+    //game.addPieceInsertedListener(listener: onPieceInserted)
     game.start()
 }

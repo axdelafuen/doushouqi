@@ -56,9 +56,15 @@ public struct Game{
     }
     
     // piece removed (eated) event
-    private var pieceRemovedCallback:[(Piece, Piece)->Void] = []
-    public mutating func addPieceRemovedListener(listener:@escaping (_ insertedPiece:Piece, _ removedPiece:Piece)->Void){
+    private var pieceRemovedCallback:[(Piece)->Void] = []
+    public mutating func addPieceRemovedListener(listener:@escaping (Piece)->Void){
         pieceRemovedCallback.append(listener)
+    }
+    
+    // piece inserted event
+    private var pieceInsertedCallback:[(Piece)->Void] = []
+    public mutating func addPieceInsertedListener(listener:@escaping (Piece)->Void){
+        pieceInsertedCallback.append(listener)
     }
     
     public init(rules:Rules, player1:Player, player2:Player){
@@ -102,12 +108,18 @@ public struct Game{
             if let move = currentMove {
                 // HANDLE RETURN VALUE OF THE BOARD
                 let firstRemoveResult:BoardResult = board.removePiece(atRow: move.rowDestination, andColumn: move.columnDestination)
-                _ = board.insert(piece: board.grid[move.rowOrigin][move.columnOrigin].piece!, atRow: move.rowDestination, andColumn: move.columnDestination)
-                _ = board.removePiece(atRow: move.rowOrigin, andColumn: move.columnOrigin)
+                let insertedResult:BoardResult = board.insert(piece: board.grid[move.rowOrigin][move.columnOrigin].piece!, atRow: move.rowDestination, andColumn: move.columnDestination)
+                let secondInsertedRemovedResult:BoardResult = board.removePiece(atRow: move.rowOrigin, andColumn: move.columnOrigin)
                 
                 if firstRemoveResult == BoardResult.ok {
                     for callback in pieceRemovedCallback{
-                        callback(oldBoard.grid[move.rowOrigin][move.columnOrigin].piece!, oldBoard.grid[move.rowDestination][move.columnDestination].piece!)
+                        callback(oldBoard.grid[move.rowDestination][move.columnDestination].piece!)
+                    }
+                }
+                
+                if secondInsertedRemovedResult == BoardResult.ok && insertedResult == BoardResult.ok {
+                    for callback in pieceInsertedCallback{
+                        callback(oldBoard.grid[move.rowOrigin][move.columnOrigin].piece!)
                     }
                 }
                 

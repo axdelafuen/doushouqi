@@ -11,7 +11,7 @@
 		EC20A87C2B5060F4008F2A0B /* CommandLineExt in Frameworks */ = {isa = PBXBuildFile; productRef = EC20A87B2B5060F4008F2A0B /* CommandLineExt */; };
 		EC311BA82B52C2DF0069CFD4 /* Model in Frameworks */ = {isa = PBXBuildFile; productRef = EC311BA72B52C2DF0069CFD4 /* Model */; };
 		EC5D67012B72439F00FC1F24 /* TestAi.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC5D67002B72439F00FC1F24 /* TestAi.swift */; };
-		EC5D67032B7243C900FC1F24 /* AiPlayerLib in Frameworks */ = {isa = PBXBuildFile; productRef = EC5D67022B7243C900FC1F24 /* AiPlayerLib */; };
+		EC5D67052B72582B00FC1F24 /* AiPlayerLib in Frameworks */ = {isa = PBXBuildFile; productRef = EC5D67042B72582B00FC1F24 /* AiPlayerLib */; };
 		EC6887AA2B6BAD8900855DAF /* debugTp1.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC6887A92B6BAD8900855DAF /* debugTp1.swift */; };
 		EC6887AC2B6BADCF00855DAF /* debugTp2.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC6887AB2B6BADCF00855DAF /* debugTp2.swift */; };
 		EC6887AE2B6BADFE00855DAF /* debugTp3.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC6887AD2B6BADFE00855DAF /* debugTp3.swift */; };
@@ -47,7 +47,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EC5D67032B7243C900FC1F24 /* AiPlayerLib in Frameworks */,
+				EC5D67052B72582B00FC1F24 /* AiPlayerLib in Frameworks */,
 				EC311BA82B52C2DF0069CFD4 /* Model in Frameworks */,
 				EC20A87C2B5060F4008F2A0B /* CommandLineExt in Frameworks */,
 			);
@@ -113,7 +113,7 @@
 			packageProductDependencies = (
 				EC20A87B2B5060F4008F2A0B /* CommandLineExt */,
 				EC311BA72B52C2DF0069CFD4 /* Model */,
-				EC5D67022B7243C900FC1F24 /* AiPlayerLib */,
+				EC5D67042B72582B00FC1F24 /* AiPlayerLib */,
 			);
 			productName = CommandLineTest;
 			productReference = EC1274462B4E8EC90089460F /* CommandLineTest */;
@@ -338,7 +338,7 @@
 			isa = XCSwiftPackageProductDependency;
 			productName = Model;
 		};
-		EC5D67022B7243C900FC1F24 /* AiPlayerLib */ = {
+		EC5D67042B72582B00FC1F24 /* AiPlayerLib */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = AiPlayerLib;
 		};

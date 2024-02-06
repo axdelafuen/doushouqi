@@ -33,6 +33,9 @@ public class AiPlayer : Player {
         var rules:Rules!
         var winner:Owner = Owner.noOne
         
+        var insertedPiece:Piece!
+        var removedPiece:Piece!
+        
         // CHOOSE OPPONENT
         let dumb1 = SimpleAIPlayer(name: "STUPID1", id: Owner.player1)!
         let dumb2 = SimpleAIPlayer(name: "STUPID2", id: Owner.player2)!
@@ -50,9 +53,14 @@ public class AiPlayer : Player {
                 winner = Owner.noOne
             }
         }
+        func onPieceEatedListener(inserted:Piece, removed:Piece){
+            insertedPiece = inserted
+            removedPiece = removed
+        }
         
         game.addMoveDoneListener(listener: onMoveDoneListener)
         game.addGameStateListener(listener: onGameStateChangedListener)
+        game.addPieceRemovedListener(listener: onPieceEatedListener)
         game.start()
         
         switch (winner){

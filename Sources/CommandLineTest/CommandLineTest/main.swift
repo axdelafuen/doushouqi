@@ -36,4 +36,4 @@ import AiPlayerLib
 
 //trainingAI(nbGameSample: 1000)
 
-AiPlayerTest()
+createMovesCsv()

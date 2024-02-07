@@ -74,7 +74,7 @@ public func gameToCSV(game: GameDatas, gameNb: Int) -> String {
 }
 
 
-public func writeGamesToCSV(games: [GameDatas], filePath: String) {
+public func writeGamesMovesToCSV(games: [GameDatas], filePath: String) {
     var csvString:String = "gameNb,moves,winner\n"
     var countGame:Int = 1
     
@@ -92,7 +92,7 @@ public func writeGamesToCSV(games: [GameDatas], filePath: String) {
     }
 }
 
-public func trainingAI(nbGameSample:Int){
+public func generateCsvMoves(nbGameSample:Int){
     var games:[GameDatas] = Array()
     for _ in 0...nbGameSample {
         let game:GameDatas? = gamesGenerator()
@@ -100,5 +100,5 @@ public func trainingAI(nbGameSample:Int){
             games.append(game)
         }
     }
-    writeGamesToCSV(games: games, filePath: "./gamesSample.csv")
+    writeGamesMovesToCSV(games: games, filePath: "./gamesSample.csv")
 }

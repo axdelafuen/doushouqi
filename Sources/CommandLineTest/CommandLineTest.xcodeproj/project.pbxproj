@@ -72,12 +72,12 @@
 		EC1274482B4E8EC90089460F /* CommandLineTest */ = {
 			isa = PBXGroup;
 			children = (
-				EC1274492B4E8EC90089460F /* main.swift */,
 				EC6887A92B6BAD8900855DAF /* debugTp1.swift */,
 				EC6887AB2B6BADCF00855DAF /* debugTp2.swift */,
 				EC6887AD2B6BADFE00855DAF /* debugTp3.swift */,
 				EC6887AF2B6BAE2100855DAF /* debugTp4.swift */,
 				EC6887B32B70F0FE00855DAF /* debugTp5.swift */,
+				EC1274492B4E8EC90089460F /* main.swift */,
 			);
 			path = CommandLineTest;
 			sourceTree = "<group>";

@@ -10,6 +10,6 @@ import Model
 
 public class AiPlayer: Player {
     
-
+    
 }
 

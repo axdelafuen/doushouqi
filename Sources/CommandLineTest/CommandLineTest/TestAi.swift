@@ -11,6 +11,13 @@ import AiPlayerLib
 
 public func createMovesCsv(){
     generateCsvMoves(nbGameSample: 5)
+    if #available(macOS 10.14, *) {
+        var movePred = MovePrediction()
+        movePred.loadDatas()
+        if let df = movePred.df {
+            print(df)
+        }
+    }
 }
 
 public func createRandomBoardCsv(){

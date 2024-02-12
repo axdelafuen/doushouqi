@@ -10,16 +10,16 @@ steps:
   - name: build
     image: swift:latest
     commands:
+      - brew install coremltools
       - cd ./Sources/Model/
       - swift build
       - cd ../CommandLineExt/
       - swift build      
-      - cd ../CommandLineTest/
-      - swift build
       - cd ../Persistence/
       - swift build
-      - brew install coremltools
       - cd ../AiPlayerLib/
+      - swift build
+      - cd ../CommandLineTest/
       - swift build
 
   - name: tests

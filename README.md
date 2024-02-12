@@ -78,7 +78,6 @@ package "Model" {
 # Model & Extensions - class diagram
 
 ```plantuml
-
 @startuml
 
 package Model {
@@ -281,8 +280,49 @@ CellType <|-- CellTypeCmdExt
 Owner <|-- OwnerCmdExt
 Animal <|-- AnimalCmdExt
 
+package Persistence {
+    struct AnimalPersist<Animal extension>{
+        +encode()
+        +decode()
+    }
+    struct BoardPersist<Board extension>{
+        +encode()
+        +decode()
+    }
+    struct CellPersist<Cell extension>{
+        +encode()
+        +decode()
+    }
+    struct CellTypePersist<CellType extension>{
+        +encode()
+        +decode()
+    }
+    struct MovePersist<Move extension>{
+        +encode()
+        +decode()
+    }
+    struct OwnerPersist<Owner extension>{
+        +encode()
+        +decode()
+    }
+    struct PiecePersist<Piece extension>{
+        +encode()
+        +decode()
+    }
+    struct RulesPersist<Rules extension>{
+        +encode()
+        +decode()
+    }
+    struct PlayerPersist<Player extension>{
+        +encode()
+        +decode()
+    }
+    struct GamePersist<Game extension>{
+        +encode()
+        +decode()
+    }
+}
 @enduml
-
 ```
 
 # Author

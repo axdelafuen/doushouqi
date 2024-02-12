@@ -8,6 +8,7 @@ let package = Package(
     dependencies: [
         .package(name: "Model", path: "../Model"),
         .package(name: "CommandLineExt", path: "../CommandLineExt"),
+        .package(name: "AiPlayerLib", path: "../AiPlayerLib"),
         .package(name: "Persistence", path: "../Persistence"),
     ],
     targets: [
@@ -15,7 +16,7 @@ let package = Package(
         // Targets can depend on other targets in this package and products from dependencies.
         .executableTarget(
             name: "CommandLineTest",
-            dependencies: ["Model", "CommandLineExt", "Persistence"],
+            dependencies: ["Model", "CommandLineExt", "AiPlayerLib", "Persistence"],
             path: "CommandLineTest"),
     ]
 )

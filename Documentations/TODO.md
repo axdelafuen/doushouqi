@@ -50,9 +50,17 @@
 
 - [ ] Sonar ? => IMPOSSIBLE (Soanr community ne prend pas en compte Swift)
 
-- [ ] IA ? => tres simple pour le moment
+- [x] IA ? => tres simple pour le moment
 
 - `@escaping` devant une injection de dependance, permet de la stocker et de ne pas la détruire a la fin de l'init
+
+# IA
+
+- [x] Ajouter le nom des animaux sur les mouvements
+
+- [x] Ajouter un "x" lorsqu'un animal en mange un autre
+
+- [ ] Générer un csv cohérent, pour prédire le meilleur coup a venir
 
 # TP 6
 

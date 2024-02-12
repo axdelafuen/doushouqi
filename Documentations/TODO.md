@@ -54,3 +54,8 @@
 
 - `@escaping` devant une injection de dependance, permet de la stocker et de ne pas la détruire a la fin de l'init
 
+# TP 6
+
+- [ ] Finish `Codable`, for `Game` and `Player`
+
+- [ ] Re write README diagram

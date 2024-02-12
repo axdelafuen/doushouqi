@@ -18,3 +18,5 @@ import CommandLineExt
 //try await two_dumb_AI_Game()
 //try await simple_AI_vs_random_Game()
 //try await testHumanVsRandom()
+
+try debugTp6()

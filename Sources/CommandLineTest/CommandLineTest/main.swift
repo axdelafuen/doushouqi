@@ -25,9 +25,7 @@ import AiPlayerLib
  */
 
 //try await two_dumb_AI_Game()
-
 //try await simple_AI_vs_random_Game()
-
 //try await testHumanVsRandom()
 
 /*
@@ -36,4 +34,6 @@ import AiPlayerLib
 
 //trainingAI(nbGameSample: 1000)
 
-createMovesCsv()
+//createMovesCsv()
+
+try debugTp6()

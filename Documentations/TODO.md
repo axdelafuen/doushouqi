@@ -56,8 +56,14 @@
 
 # IA
 
-- [ ] Ajouter le nom des animaux sur les mouvements
+- [x] Ajouter le nom des animaux sur les mouvements
 
-- [ ] Ajouter un "x" lorsqu'un animal en mange un autre
+- [x] Ajouter un "x" lorsqu'un animal en mange un autre
 
 - [ ] Générer un csv cohérent, pour prédire le meilleur coup a venir
+
+# TP 6
+
+- [ ] Finish `Codable`, for `Game` and `Player`
+
+- [ ] Re write README diagram

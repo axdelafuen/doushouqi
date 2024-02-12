@@ -8,14 +8,15 @@ let package = Package(
     dependencies: [
         .package(name: "Model", path: "../Model"),
         .package(name: "CommandLineExt", path: "../CommandLineExt"),
-        .package(name: "AiPlayerLib", path: "../AiPlayerLib")
+        .package(name: "AiPlayerLib", path: "../AiPlayerLib"),
+        .package(name: "Persistence", path: "../Persistence"),
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
         // Targets can depend on other targets in this package and products from dependencies.
         .executableTarget(
             name: "CommandLineTest",
-            dependencies: ["Model", "CommandLineExt", "AiPlayerLib"],
+            dependencies: ["Model", "CommandLineExt", "AiPlayerLib", "Persistence"],
             path: "CommandLineTest"),
     ]
 )

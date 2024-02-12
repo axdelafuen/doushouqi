@@ -18,6 +18,8 @@ steps:
       - swift build
       - cd ../CommandLineTest/
       - swift build
+      - cd ../Persistence
+      - swift build
 
   - name: tests
     image: swift:latest

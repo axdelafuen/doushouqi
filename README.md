@@ -48,11 +48,13 @@ swift test
 @startuml
 left to right direction
 
-"CommandLineTest" ..> "CommandLineExt"
-"CommandLineTest" ..> "Model"
-
 package "CommandLineTest" {
   node "Command Line Tool" 
+}
+
+
+package "Persistence" {
+  node "Model Persistence Extensions"
 }
 
 package "CommandLineExt" {
@@ -64,7 +66,12 @@ package "Model" {
   node "Tests Model Classes"
 }
 
+"Model Persistence Extensions" --|> "Model Classes"
 "Model Classes Extensions" --|> "Model Classes"
+
+"CommandLineTest" ..> "CommandLineExt"
+"CommandLineTest" ..> "Persistence"
+"CommandLineTest" ..> "Model"
 
 @enduml
 ```

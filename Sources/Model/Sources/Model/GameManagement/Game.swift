@@ -8,10 +8,10 @@
 import Foundation
 
 public struct Game{
-    private var rules:Rules
-    private var board:Board
-    private let player1:Player
-    private let player2:Player
+    public private(set) var rules:Rules
+    public private(set) var board:Board
+    public let player1:Player
+    public let player2:Player
     
     // game is starting event
     private var gameStartCallback:[(Board)->Void] = []
@@ -67,11 +67,16 @@ public struct Game{
         pieceInsertedCallback.append(listener)
     }
     
-    public init(rules:Rules, player1:Player, player2:Player){
+    public init(rules:Rules, player1:Player, player2:Player, board:Board? = nil){
         self.rules = rules
         self.player1 = player1
         self.player2 = player2
-        self.board = type(of: rules).createBoard()
+        if let board {
+            self.board = board
+        }
+        else{
+            self.board = type(of: rules).createBoard()
+        }
     }
     
     public mutating func start(){

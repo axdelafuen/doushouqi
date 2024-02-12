@@ -13,12 +13,13 @@ steps:
       - cd ./Sources/Model/
       - swift build
       - cd ../CommandLineExt/
-      - swift build
-      - cd ../AiPlayerLib/
-      - swift build
+      - swift build      
       - cd ../CommandLineTest/
       - swift build
-      - cd ../Persistence
+      - cd ../Persistence/
+      - swift build
+      - brew install coremltools
+      - cd ../AiPlayerLib/
       - swift build
 
   - name: tests

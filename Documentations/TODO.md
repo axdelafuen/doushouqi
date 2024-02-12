@@ -64,8 +64,8 @@
 
 # TP 6
 
-- [ ] Finish `Codable`, for `Game` and `Player`
+- [ ] Finish `Codable`, for `Game` and `Player` => Code writed, but there is error
 
 - [x] Re write README diagram
 
-- [ ] Fix CI for AIPlayer package
+- [ ] Fix CI for AIPlayer package => Missing CoreML package

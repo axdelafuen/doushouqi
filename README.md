@@ -280,6 +280,11 @@ CellType <|-- CellTypeCmdExt
 Owner <|-- OwnerCmdExt
 Animal <|-- AnimalCmdExt
 
+@enduml
+```
+
+```plantuml
+@startuml
 package Persistence {
     struct AnimalPersist<Animal extension>{
         +encode()

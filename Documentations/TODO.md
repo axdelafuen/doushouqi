@@ -67,3 +67,5 @@
 - [ ] Finish `Codable`, for `Game` and `Player`
 
 - [ ] Re write README diagram
+
+- [ ] Fix CI for AIPlayer package

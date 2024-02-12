@@ -58,7 +58,7 @@ public func two_dumb_AI_Game() async throws {
             
             counter += 1
         }
-        try await Task.sleep(nanoseconds: UInt64(0.2*(pow(10.0, 9))))
+        //try await Task.sleep(nanoseconds: UInt64(0.2*(pow(10.0, 9))))
     }
     print(gameOver.1)
     print(board)
@@ -97,7 +97,7 @@ public func simple_AI_vs_random_Game() async throws {
             
             counter += 1
         }
-        try await Task.sleep(nanoseconds: UInt64(0.2*(pow(10.0, 9))))
+        //try await Task.sleep(nanoseconds: UInt64(0.2*(pow(10.0, 9))))
     }
     print(gameOver.1)
     print(board)
@@ -187,7 +187,7 @@ public func testHumanVsRandom() async throws {
             
             counter += 1
         }
-        try await Task.sleep(nanoseconds: UInt64(1*(pow(10.0, 9))))
+        //try await Task.sleep(nanoseconds: UInt64(1*(pow(10.0, 9))))
     }
     print(gameOver.1)
     print(board)

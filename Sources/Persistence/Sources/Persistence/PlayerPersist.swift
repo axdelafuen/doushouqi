@@ -35,7 +35,7 @@ internal struct InputMethodData: Codable {
 
 /*
 extension Player: Codable {
-
+    
     enum Key: CodingKey {
         case ownerId
         case nameValue
@@ -49,7 +49,7 @@ extension Player: Codable {
         try container.encode(name, forKey: .nameValue)
         if self is HumanPlayer {
             let inputMethodData = InputMethodData(functionPointer: UnsafeMutableRawPointer(mutating: unsafeBitCast((self as! HumanPlayer).input, to: UnsafeRawPointer.self)))
-             try container.encode(inputMethodData, forKey: .inputMethodData)
+            try container.encode(inputMethodData, forKey: .inputMethodData)
         }
     }
     
@@ -58,12 +58,12 @@ extension Player: Codable {
         let owner = try value.decode(Owner.self, forKey: .ownerId)
         let name = try value.decode(String.self, forKey: .nameValue)
         /*
-        if self is HumanPlayer {
-            let inputMethodData = try value.decode(InputMethodData.self, forKey: .inputMethodData)
-            let input = unsafeBitCast(inputMethodData.functionPointer, to: ((HumanPlayer) -> Move).self)
-            (self as! HumanPlayer).init(name: name, id: owner, inputMethod: input)
-        }
-        */
+         if self is HumanPlayer {
+         let inputMethodData = try value.decode(InputMethodData.self, forKey: .inputMethodData)
+         let input = unsafeBitCast(inputMethodData.functionPointer, to: ((HumanPlayer) -> Move).self)
+         (self as! HumanPlayer).init(name: name, id: owner, inputMethod: input)
+         }
+         */
         self.init(name:name, id:owner)!
     }
 }

@@ -2,44 +2,40 @@ import Foundation
 import Model
 
 
-internal struct InputMethodData: Codable {
-    let functionPointer: UnsafeMutableRawPointer
+public struct PlayerDatas: Codable {
     
-    public init(functionPointer: UnsafeMutableRawPointer) {
-        self.functionPointer = functionPointer
+    public let id:Owner
+    public let name:String
+    public let playerType:String
+    
+    public init(name: String, id: Owner, playerType:String){
+        self.name = name
+        self.id = id
+        self.playerType = playerType
     }
     
-    enum Key: CodingKey {
-        case inputMethodPtr
-    }
-    
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: Key.self)
-        let pointerValue = UInt(bitPattern: functionPointer)
-        try container.encode(pointerValue, forKey: .inputMethodPtr)
-
-    }
-    
-    public init(from decoder: Decoder) throws {
-        let value = try decoder.container(keyedBy: Key.self)
-        let pointerValue = try value.decode(UInt.self, forKey: .inputMethodPtr)
-        let inputMethodPtr = UnsafeMutableRawPointer(bitPattern: pointerValue)
-        
-        guard let unwrappedPtr = inputMethodPtr else {
-            throw DecodingError.dataCorruptedError(forKey: .inputMethodPtr, in: value, debugDescription: "Failed to decode UnsafeMutableRawPointer")
+    public func toObject(input:((HumanPlayer) -> Move)?) -> Player? {
+        switch playerType{
+        case "HumanPlayer":
+            if let input{
+                return HumanPlayer(name: name, id: id, inputMethod: input)
+            }
+            else{
+                return nil
+            }
+        case "SimpleAIPlayer":
+            return SimpleAIPlayer(name: name, id: id)
+        case "RandomPlayer":
+            return RandomPlayer(name: name, id: id)
+        default:
+            return nil
         }
-        
-        self.init(functionPointer: unwrappedPtr)
     }
-}
-
-/*
-extension Player: Codable {
     
     enum Key: CodingKey {
         case ownerId
         case nameValue
-        case inputMethodData
+        case playerType
     }
     
     public func encode(to encoder: Encoder) throws {
@@ -47,24 +43,35 @@ extension Player: Codable {
         
         try container.encode(id, forKey: .ownerId)
         try container.encode(name, forKey: .nameValue)
-        if self is HumanPlayer {
-            let inputMethodData = InputMethodData(functionPointer: UnsafeMutableRawPointer(mutating: unsafeBitCast((self as! HumanPlayer).input, to: UnsafeRawPointer.self)))
-            try container.encode(inputMethodData, forKey: .inputMethodData)
-        }
+        try container.encode(playerType, forKey: .playerType)
     }
     
-    public convenience init(from decoder: Decoder) throws {
+    public init(from decoder: Decoder) throws {
         let value = try decoder.container(keyedBy: Key.self)
         let owner = try value.decode(Owner.self, forKey: .ownerId)
         let name = try value.decode(String.self, forKey: .nameValue)
-        /*
-         if self is HumanPlayer {
-         let inputMethodData = try value.decode(InputMethodData.self, forKey: .inputMethodData)
-         let input = unsafeBitCast(inputMethodData.functionPointer, to: ((HumanPlayer) -> Move).self)
-         (self as! HumanPlayer).init(name: name, id: owner, inputMethod: input)
-         }
-         */
-        self.init(name:name, id:owner)!
+        let playerType = try value.decode(String.self, forKey: .playerType)
+
+        self.init(name:name, id:owner, playerType: playerType)
     }
 }
-*/
+
+extension Player {
+    public func toData() -> PlayerDatas{
+        var playerType: String
+        
+        switch self {
+        case is HumanPlayer:
+            playerType = "HumanPlayer"
+        case is SimpleAIPlayer:
+            playerType = "SimpleAIPlayer"
+        case is RandomPlayer:
+            playerType = "RandomPlayer"
+        default:
+            playerType = "unknown"
+        }
+        
+        return PlayerDatas(name: self.name, id: self.id, playerType: playerType)
+    }
+}
+

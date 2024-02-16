@@ -74,4 +74,3 @@ extension Player {
         return PlayerDatas(name: self.name, id: self.id, playerType: playerType)
     }
 }
-

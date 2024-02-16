@@ -9,7 +9,7 @@ import Foundation
 
 public class HumanPlayer: Player {
     
-    public let input:(HumanPlayer) -> Move
+    public private(set) var input:(HumanPlayer) -> Move
     
     public init?(name: String, id: Owner, inputMethod: @escaping (HumanPlayer) -> Move){
         self.input = inputMethod
@@ -18,5 +18,9 @@ public class HumanPlayer: Player {
     
     override public func chooseMove(board: Board, rules: Rules) -> Move? {
         return self.input(self)
+    }
+    
+    public func addInputMethod(input: @escaping (HumanPlayer) -> Move){
+        self.input = input
     }
 }

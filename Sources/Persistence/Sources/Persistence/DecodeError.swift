@@ -1,5 +1,6 @@
 import Foundation
 
-enum CodingError: Error {
-        case unknownValue
+enum SerializationError: Error {
+    case unknownValue
+    case decodePlayerImpossible
 }

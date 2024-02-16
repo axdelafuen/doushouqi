@@ -46,7 +46,9 @@ extension Game : Codable {
         if let player1, let player2 {
             self.init(rules: rules.toObject()!, player1: player1, player2: player2, board: board)
         }
-        self.init(rules: rules.toObject()!, player1: player1!, player2: player2!, board: board)
+        else{
+            throw SerializationError.decodePlayerImpossible
+        }
     }
 }
 

@@ -30,7 +30,7 @@ extension Owner : Codable {
         case 2:
             self = .player2
         default:
-            throw CodingError.unknownValue
+            throw SerializationError.unknownValue
         }
     }
 }

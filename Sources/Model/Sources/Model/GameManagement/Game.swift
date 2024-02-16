@@ -19,6 +19,12 @@ public struct Game{
         gameStartCallback.append(listener)
     }
 
+    // save the game
+    private var saveGameCallback:[(Game) -> Void] = []
+    public mutating func addSaveGameListener(listener:@escaping (Game) -> Void){
+        saveGameCallback.append(listener)
+    }
+    
     // next turn, current plyer changed event
     private var nextPlayerCallback:[(Player)->Void] = []
     public mutating func addNextPlayerListener(listener:@escaping (Player) -> Void) {
@@ -88,6 +94,11 @@ public struct Game{
         var currentPlayer:Player
         var gameOver:(Bool, Result) = (false, Result.notFinished)
         
+        // save game callback
+        for callback in saveGameCallback {
+            callback(self)
+        }
+        
         while(!gameOver.0) {
             let oldBoard = board
             
@@ -136,7 +147,9 @@ public struct Game{
                 for callback in boardChangedCallback {
                     callback(board)
                 }
-                
+                for callback in saveGameCallback {
+                    callback(self)
+                }
                 gameOver = rules.isGameOver(board: board, row: move.rowDestination, column: move.columnDestination)
             }
             

@@ -10,26 +10,45 @@ import Model
 import Persistence
 
 func debugTp6() throws{
-    let jsonDecoder = JSONDecoder()
+    /*
+     let jsonDecoder = JSONDecoder()
+     
+     let cell = CellType.water
+     
+     let piece = Piece(owner: Owner.player1, animal: Animal.cat)
+     
+     //try printEncode(piece)
+     
+     let move = Move(owner: Owner.player1, rowOrigin: 0, columnOrigin: 0, rowDestination: 0, columnDestination: 0)
+     
+     let moveDatas = try printEncode(move)
+     
+     let board = VerySimpleRules.createBoard()
+     let boardDatas = try printEncode(board)
+     
+     let data = try jsonDecoder.decode(Board.self, from: boardDatas)
+     
+     print(data)
+     
+     //try printDecode(boardDatas, type: Board)
+    */
+    var game = Game(rules: VerySimpleRules(), player1: HumanPlayer(name: "Robert", id: Owner.player1, inputMethod: userInputMethod)!, player2: SimpleAIPlayer(name: "BOT", id: Owner.player2)!)
     
-    let cell = CellType.water
+    game.addSaveGameListener(listener: serialize)
     
-    let piece = Piece(owner: Owner.player1, animal: Animal.cat)
-        
-    //try printEncode(piece)
+    game.start()
     
-    let move = Move(owner: Owner.player1, rowOrigin: 0, columnOrigin: 0, rowDestination: 0, columnDestination: 0)
-    
-    let moveDatas = try printEncode(move)
-    
-    let board = VerySimpleRules.createBoard()
-    let boardDatas = try printEncode(board)
-    
-    let data = try jsonDecoder.decode(Board.self, from: boardDatas)
-    
-    print(data)
-    
-    //try printDecode(boardDatas, type: Board)
+    func serialize(game:Game) {
+        let jsonEncoder = JSONEncoder()
+        do{
+            let jsonData = try jsonEncoder.encode(game)
+            let json = String(data: jsonData, encoding: String.Encoding.utf8)
+            print(json!)
+            // mettre dans un fichier
+        }catch{
+            print("ERROR : NO DATA SAVED !")
+        }
+    }
 }
 
 func printEncode<T>(_ val: T) throws -> Data where T : Encodable {
@@ -53,3 +72,4 @@ func printDecode<T>(_ val: Data, type:T) throws -> T where T : Decodable {
     
     return data
 }
+

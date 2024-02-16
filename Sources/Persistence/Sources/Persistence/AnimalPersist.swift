@@ -50,7 +50,7 @@ extension Animal: Codable{
         case 7:
             self = .wolf
         default:
-            throw CodingError.unknownValue
+            throw SerializationError.unknownValue
         }
     }
 }

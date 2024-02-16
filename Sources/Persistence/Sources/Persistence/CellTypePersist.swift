@@ -37,7 +37,7 @@ extension CellType : Codable {
         case 4:
             self = .water
         default:
-            throw CodingError.unknownValue
+            throw SerializationError.unknownValue
         }
     }
 }

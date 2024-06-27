@@ -9,6 +9,8 @@
     <img src="./Documentations/doushouqi.png" height="200">
 </div>
 
+You can find the front-end in this repository : [doushouqi-app](https://github.com/axdelafuen/doushouqi-app)
+
 # Getting started
 
 Clone the repository :

@@ -333,7 +333,7 @@ package Persistence {
 
 # Author
 
-- [Axel DE LA FUENTE](https://codefirst.iut.uca.fr/git/axel.de_la_fuente)
+- [Axel DE LA FUENTE](https://github.com/axdelafuen)
 
 # Acknowledgements
 
